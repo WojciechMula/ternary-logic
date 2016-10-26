@@ -1,28 +1,23 @@
 from ast import *
 
-def transform(root):
-
-    def negate(node):
-        ones = Constant(True)
-        val  = transform(node)
-        return Binary('xor', val, ones)
+def transform_binary(root):
 
     if isinstance(root, (Constant, Variable)):
         return root
 
     if isinstance(root, Binary):
-        a = transform(root.a) 
-        b = transform(root.b) 
+        a = transform_binary(root.a) 
+        b = transform_binary(root.b) 
 
         if root.op in ('or', 'xor'):
             return Binary(root.op, a, b)
 
         elif root.op == 'nor':
-            return negate(Binary('or', a, b))
+            return Negation(Binary('or', a, b))
         elif root.op == 'nand':
-            return negate(Binary('and', a, b))
+            return Negation(Binary('and', a, b))
         elif root.op == 'xnor':
-            return negate(Binary('xor', a, b))
+            return Negation(Binary('xor', a, b))
         elif root.op == 'and':
             if isinstance(a, Negation):
                 return Binary('notand', a.value, b)
@@ -32,9 +27,9 @@ def transform(root):
                 return Binary(root.op, a, b)
 
     if isinstance(root, Condition):
-        var   = transform(root.var)
-        true  = transform(root.true)
-        false = transform(root.false)
+        var   = transform_binary(root.var)
+        true  = transform_binary(root.true)
+        false = transform_binary(root.false)
 
         t1 = Binary('and', var, true)
         t2 = Binary('and', Negation(var), false)
@@ -42,6 +37,41 @@ def transform(root):
         return transform(t3)
 
     if isinstance(root, Negation):
-        return negate(transform(root.value))
+        return Negation(transform_binary(root.value))
 
     assert False, root
+
+
+def transform_negations(root):
+
+    def negate(node):
+        ones = Constant(True)
+        val  = transform_negations(node)
+        return Binary('xor', val, ones)
+
+    if isinstance(root, (Constant, Variable)):
+        return root
+
+    if isinstance(root, Binary):
+        root.a = transform_negations(root.a) 
+        root.b = transform_negations(root.b) 
+
+        return root
+
+    if isinstance(root, Condition):
+        root.var   = transform_negations(root.var)
+        root.true  = transform_negations(root.true)
+        root.false = transform_negations(root.false)
+
+        return root
+
+    if isinstance(root, Negation):
+        return negate(transform_negations(root.value))
+
+    assert False, root
+
+
+def transform(root):
+    root = transform_binary(root)
+
+    return transform_negations(root)
