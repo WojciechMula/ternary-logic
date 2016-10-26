@@ -1,0 +1,4 @@
+// %(COMMENT)s
+%(TYPE)s %(NAME)s<0x%(CODE)02x>(const %(TYPE)s C, const %(TYPE)s B, const %(TYPE)s A) {
+    %(BODY)s
+}

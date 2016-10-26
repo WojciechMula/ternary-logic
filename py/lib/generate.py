@@ -1,0 +1,67 @@
+from ast import *
+
+class Generator:
+    def __init__(self, root, assembler):
+        self.root = root
+        self.program = []
+        self.variables = {}
+        self.assembler = assembler
+        self.last   = None
+
+    def emit(self, node):
+        if node in self.variables:
+            return self.variables[node]
+
+        var  = None
+        expr = None
+        if isinstance(node, Constant):
+            if node.value:
+                var, expr = self.assembler.add_true()
+            else:
+                var, expr = self.assembler.add_false()
+
+        elif isinstance(node, Variable):
+            var = node.var
+
+        elif isinstance(node, Negation):
+            neg = self.emit(node.value)
+            var, expr = self.assembler.add_negation(neg)
+
+        elif isinstance(node, Binary):
+            a = self.emit(node.a)
+            b = self.emit(node.b)
+
+            if node.op == 'and':
+                var, expr = self.assembler.add_and(a, b)
+            elif node.op == 'or':
+                var, expr = self.assembler.add_or(a, b)
+            elif node.op == 'xor':
+                var, expr = self.assembler.add_xor(a, b)
+            elif node.op == 'notand':
+                var, expr = self.assembler.add_notand(a, b)
+            else:
+                assert False, "unsupported op=%s" % node.op
+
+        elif isinstance(node, Condition):
+            assert False
+
+        assert var != None 
+
+        if expr:
+            self.program.append(expr)
+
+        self.variables[node] = var
+        self.last = var
+        return var
+
+    def getvar(self):
+        var = 't%d' % self.varnum
+        self.varnum += 1
+        return var
+        
+
+    def run(self):
+        self.emit(self.root)
+        self.program.append('return %s;' % self.last)
+
+        return self.program

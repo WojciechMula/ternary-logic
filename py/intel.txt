@@ -1,0 +1,293 @@
+# Function comes from Intel's documentation:
+#
+# CHAPTER 5 INSTRUCTION SET REFERENCE, V-Z 5.1 TERNARY BIT VECTOR LOGIC TABLE
+#
+# Excerpts:
+#
+# The three input bit source data will be denoted with the capital letters: A,
+# B, C; where A represents a bit from the first source operand (also the
+# destination operand), B and C represent a bit from the 2nd and 3rd source
+# operands.
+#
+# Each expression consists of either a unary or binary boolean operator and
+# associated operands. Each binary boolean operator is expressed in lowercase
+# letters, and operands concatenated after the logic operator. The unary
+# operator ‘not’ is expressed using ‘!’.  Additionally, the conditional
+# expression “A?B:C” expresses a result returning B if A is set, returning C
+# otherwise.
+#
+# A binary boolean operator is followed by two operands, e.g. andAB. For a
+# compound binary expression that contain commutative components and comprising
+# the same logic operator, the 2nd logic operator is omitted and three operands
+# can be concatenated in sequence, e.g. andABC. When the 2nd operand of the
+# first binary boolean expres- sion comes from the result of another boolean
+# expression, the 2nd boolean expression is concatenated after the uppercase
+# operand of the first logic expression, e.g. norBnandAC. When the result is
+# independent of an operand, that operand is omitted in the logic expression,
+# e.g. zeros or norCB.
+#
+# The 3-input expression “majorABC” returns 0 if two or more input bits are 0,
+# returns 1 if two or more input bits are 1. The 3-input expression “minorABC”
+# returns 1 if two or more input bits are 0, returns 0 if two or more input
+# bits are 1.
+#
+# Note:
+# 
+# I replaced three-argument functions with binary functions.
+
+00 FALSE
+01 andAnorBC
+02 norBnandAC
+03 andA!B
+04 norCnandBA
+05 andA!C
+06 andAxorBC
+07 andAnandBC
+08 norABC
+09 norCB
+0a norBxorAC
+0b A?!B:norBC
+0c norCxorBA
+0d A?!C:norBC
+0e A?xorBC:norBC
+0f A?nandBC:norBC
+10 andCnorBA
+11 norBxnorAC
+12 andC!B
+13 norBnorAC
+14 C?norBA:andBA
+15 C?norBA:A
+16 C?!B:andBA
+17 C?!B:A
+18 norBA
+19 norBandAC
+1a C?!B:norBA
+1b !B
+1c C?norBA:xnorBA
+1d A?!C:!B
+1e A?xorBC:!B
+1f A?nandBC:!B
+20 andBnorAC
+21 norCxnorBA
+22 B?norAC:andAC
+23 B?norAC:A
+24 andB!C
+25 norCnorBA
+26 B?!C:andAC
+27 B?!C:A
+28 norCA
+29 norCandBA
+2a B?norAC:xnorAC
+2b A?!B:!C
+2c B?!C:norAC
+2d !C
+2e A?xorBC:!C
+2f A?nandBC:!C
+30 norAxnorBC
+31 A?norBC:xorBC
+32 B?norAC:C
+33 xorBorAC
+34 C?norBA:B
+35 xorCorBA
+36 xorCB
+37 B?!C:orAC
+38 norAandBC
+39 minorABC
+3a C?!B:!A
+3b nandBorAC
+3c B?!C:!A
+3d nandCorBA
+3e A?xorBC:nandBC
+3f nandCB
+40 norAnandBC
+41 A?norBC:andBC
+42 andCxorBA
+43 A?!B:andBC
+44 andBxorAC
+45 A?!C:andBC
+46 A?xorBC:andBC
+47 xorAandBC
+48 norAxorBC
+49 A?norBC:xnorBC
+4a C?xorBA:norBA
+4b A?!B:xnorBC
+4c B?xorAC:norAC
+4d A?!C:xnorBC
+4e xnorABC
+4f A?nandBC:xnorBC
+50 andC!A
+51 A?norBC:C
+52 andCnandBA
+53 A?!B:C
+54 C?!A:andBA
+55 xorCA
+56 xorCandBA
+57 A?nandBC:C
+58 C?!A:norBA
+59 C?!A:!B
+5a C?nandBA:norBA
+5b C?nandBA:!B
+5c B?xorAC:!A
+5d B?xorAC:nandAC
+5e C?nandBA:xnorBA
+5f nandBxnorAC
+60 andB!A
+61 A?norBC:B
+62 B?!A:andAC
+63 xorBA
+64 andBnandAC
+65 A?!C:B
+66 xorBandAC
+67 A?nandBC:B
+68 B?!A:norAC
+69 B?!A:!C
+6a B?!A:xnorAC
+6b C?xorBA:nandBA
+6c B?nandAC:norAC
+6d B?nandAC:!C
+6e B?nandAC:xnorAC
+6f nandCxnorBA
+70 norAnorBC
+71 xorAorBC
+72 B?!A:C
+73 A?!B:orBC
+74 C?!A:B
+75 A?!C:orBC
+76 B?nandAC:C
+77 A?nandBC:orBC
+78 !A
+79 nandAorBC
+7a C?nandBA:!A
+7b nandBA
+7c B?nandAC:!A
+7d nandCA
+7e nandAxnorBC
+7f nandABC
+80 andABC
+81 andAxnorBC
+82 andCA
+83 B?andAC:A
+84 andBA
+85 C?andBA:A
+86 andAorBC
+87 A
+88 A?andBC:norBC
+89 B?andAC:!C
+8a A?C:norBC
+8b C?A:!B
+8c A?B:norBC
+8d B?A:!C
+8e xnorAorBC
+8f orAnorBC
+90 andCxnorBA
+91 B?andAC:xorAC
+92 B?andAC:C
+93 B?andAC:orAC
+94 C?xnorBA:andBA
+95 B?A:xorAC
+96 B?A:C
+97 B?A:orAC
+98 A?andBC:!B
+99 xnorBandAC
+9a A?C:!B
+9b nandBnandAC
+9c xnorBA
+9d B?A:nandAC
+9e A?orBC:!B
+9f orA!B
+a0 andBxnorAC
+a1 C?andBA:xorBA
+a2 B?xnorAC:andAC
+a3 B?xnorAC:A
+a4 C?andBA:B
+a5 C?andBA:orBA
+a6 C?A:B
+a7 C?A:orBA
+a8 A?andBC:!C
+a9 xnorCandBA
+aa xnorCA
+ab C?A:nandBA
+ac A?B:!C
+ad nandCnandBA
+ae A?orBC:!C
+af orA!C
+b0 A?andBC:xorBC
+b1 orABC
+b2 A?C:xorBC
+b3 B?xnorAC:orAC
+b4 A?B:xorBC
+b5 C?xnorBA:orBA
+b6 A?orBC:xorBC
+b7 orAxorBC
+b8 xnorAandBC
+b9 A?xnorBC:nandBC
+ba A?C:nandBC
+bb nandBxorAC
+bc A?B:nandBC
+bd nandCxorBA
+be A?orBC:nandBC
+bf orAnandBC
+c0 andCB
+c1 A?xnorBC:andBC
+c2 andCorAB
+c3 B?C:A
+c4 andBorAC
+c5 C?B:A
+c6 majorABC
+c7 orAandBC
+c8 B?C:norAC
+c9 xnorCB
+ca xnorCorBA
+cb C?orBA:!B
+cc xnorBorAC
+cd B?orAC:!C
+ce A?orBC:xnorBC
+cf orAxnorBC
+d0 A?andBC:C
+d1 A?xnorBC:C
+d2 C
+d3 B?C:orAC
+d4 A?B:C
+d5 B?orAC:xorAC
+d6 orCandBA
+d7 orCA
+d8 B?C:!A
+d9 B?C:nandAC
+da orCnorBA
+db orC!B
+dc B?orAC:!A
+dd B?orAC:nandAC
+de orCxnorBA
+df nandBnorAC
+e0 A?andBC:B
+e1 A?xnorBC:B
+e2 A?C:B
+e3 C?orBA:xorBA
+e4 B
+e5 C?B:orBA
+e6 orBandAC
+e7 orBA
+e8 C?B:!A
+e9 C?B:nandBA
+ea C?orBA:!A
+eb C?orBA:nandBA
+ec orBnorAC
+ed orB!C
+ee orBxnorAC
+ef nandCnorBA
+f0 A?andBC:orBC
+f1 A?xnorBC:orBC
+f2 A?C:orBC
+f3 orCxorBA
+f4 A?B:orBC
+f5 orBxorAC
+f6 orCB
+f7 orABC
+f8 nandAnandBC
+f9 nandAxorBC
+fa orC!A
+fb orCnandBA
+fc orB!A
+fd orBnandAC
+fe nandAnorBC
+ff TRUE

@@ -1,0 +1,14 @@
+// Generated automatically, plase do not edit
+#pragma once
+
+namespace ternarylogic {
+
+    namespace sse {
+
+        %(FUNCTIONS)s
+
+    } // namespace sse
+
+} // namespace ternarylogic
+
+// eof
