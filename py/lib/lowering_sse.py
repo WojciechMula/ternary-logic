@@ -6,8 +6,8 @@ def transform_binary(root):
         return root
 
     if isinstance(root, Binary):
-        a = transform_binary(root.a) 
-        b = transform_binary(root.b) 
+        a = transform_binary(root.a)
+        b = transform_binary(root.b)
 
         if root.op in ('or', 'xor'):
             return Binary(root.op, a, b)
@@ -53,8 +53,8 @@ def transform_negations(root):
         return root
 
     if isinstance(root, Binary):
-        root.a = transform_negations(root.a) 
-        root.b = transform_negations(root.b) 
+        root.a = transform_negations(root.a)
+        root.b = transform_negations(root.b)
 
         return root
 

@@ -1,6 +1,6 @@
 from ast import *
 
-class Generator:
+class BodyGenerator:
     def __init__(self, root, assembler):
         self.root = root
         self.program = []
@@ -55,7 +55,7 @@ class Generator:
         elif isinstance(node, Condition):
             assert False
 
-        assert var != None 
+        assert var != None
 
         if expr:
             self.program.append(expr)
@@ -64,11 +64,6 @@ class Generator:
         self.last = var
         return var
 
-    def getvar(self):
-        var = 't%d' % self.varnum
-        self.varnum += 1
-        return var
-        
 
     def run(self):
         self.emit(self.root)

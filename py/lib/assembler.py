@@ -3,11 +3,10 @@ class Assembler:
     def __init__(self):
         self.varnumber = 0
 
-
     def get_var(self):
         var = 't%d' % (self.varnumber)
         self.varnumber += 1
-        
+
         return var
 
     def add_true(self):

@@ -1,7 +1,7 @@
 import parser
 
 def load(file):
-    
+
     result = {}
 
     for k, line in enumerate(file):

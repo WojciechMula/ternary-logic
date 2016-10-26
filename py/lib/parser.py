@@ -40,9 +40,7 @@ def expression(lexer):
                     ret = Binary(op, Variable(lexer.peek()), ret)
                     lexer.consume()
 
-                #assert lexer.eof() or lexer.peek() == ':'
-
-                return ret 
+                return ret
 
 
 def parse(expr):
