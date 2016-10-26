@@ -9,7 +9,6 @@ Language_C      = 2
 
 Target_SSE      = 10
 Target_AVX2     = 20
-Target_X86      = 30
 
 
 def main():
@@ -28,7 +27,7 @@ def parse_args(args):
 
     parser.add_option(
         "--target",
-        help="choose target (SSE, AVX2, x86)"
+        help="choose target (SSE, AVX2)"
     )
 
     parser.add_option(
@@ -55,10 +54,8 @@ def parse_args(args):
         options.target = Target_SSE
     elif options.target.lower() == 'avx2':
         options.target = Target_AVX2
-    elif options.target.lower() == 'x86':
-        options.target = Target_X86
     else:
-        valid = ('sse', 'avx2', 'x86')
+        valid = ('sse', 'avx2')
         parser.error("--target expects: %s" % ', '.join(valid))
 
     return options
@@ -107,9 +104,6 @@ class CodeGenerator:
         elif self.options.target == Target_AVX2:
             self.lowering   = lib.lowering_sse.transform
             self.assembler  = lib.assembler_avx2.AssemblerAVX2
-            pass
-
-        elif self.options.target == Target_X86:
             pass
 
         with get_file(self.get_function_file()) as f:
