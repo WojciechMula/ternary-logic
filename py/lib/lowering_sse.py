@@ -37,7 +37,7 @@ def transform(root):
         false = transform(root.false)
 
         t1 = Binary('and', var, true)
-        t2 = Binary('and', Negation(var), true)
+        t2 = Binary('and', Negation(var), false)
         t3 = Binary('or', t1, t2)
         return transform(t3)
 

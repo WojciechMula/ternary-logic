@@ -1,9 +1,12 @@
 // Generated automatically, plase do not edit
 #pragma once
+#include <emmintrin.h>
 
 namespace ternarylogic {
 
     namespace sse {
+
+        template<unsigned> __m128i ternary(const __m128i, const __m128i, const __m128i) {} 
 
         %(FUNCTIONS)s
 

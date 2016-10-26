@@ -7,6 +7,8 @@ class Generator:
         self.variables = {}
         self.assembler = assembler
         self.last   = None
+        self.const0 = None
+        self.const1 = None
 
     def emit(self, node):
         if node in self.variables:
@@ -16,9 +18,17 @@ class Generator:
         expr = None
         if isinstance(node, Constant):
             if node.value:
-                var, expr = self.assembler.add_true()
+                if self.const1 is None:
+                    var, expr = self.assembler.add_true()
+                    self.const1 = var
+                else:
+                    var = self.const1
             else:
-                var, expr = self.assembler.add_false()
+                if self.const0 is None:
+                    var, expr = self.assembler.add_false()
+                    self.const0 = var
+                else:
+                    var = self.const0
 
         elif isinstance(node, Variable):
             var = node.var
