@@ -34,9 +34,25 @@
 # Note:
 # 
 # I replaced three-argument functions with binary functions.
+#
+# Here is my attempt to express functions major and minor with basic functors.
+#
+#   A B C | majorABC | minorABC
+#   0 0 0 | 0        | 1
+#   0 0 1 | 0        | 1
+#   0 1 0 | 0        | 1
+#   0 1 1 | 1        | 0
+#   1 0 0 | 0        | 1
+#   1 0 1 | 1        | 0
+#   1 1 0 | 1        | 0
+#   1 1 1 | 1        | 0
+#
+#   majorABC = A?orBC:andBC
+#   minorABC = A?norBC:nandBC = !A?orBC:andBC  # my parser accepts it
 
 00 FALSE
-01 norABC
+### 01 norABC
+01 norAorBC
 02 andCnorBA
 03 norBA
 04 andBnorAC
@@ -58,7 +74,8 @@
 14 norCxnorBA
 15 norCandBA
 16 A?norBC:xorBC
-17 minorABC
+### 17 minorABC
+17 !A?orBC:andBC
 18 A?norBC:andBC
 19 A?norBC:xnorBC
 1a A?norBC:C
@@ -140,7 +157,8 @@
 66 xorCB
 67 A?xorBC:nandBC
 68 A?xorBC:andBC
-69 xnorABC
+### 69 xnorABC ERROR?
+69 xnorAxorBC
 6a xorCandBA
 6b C?nandBA:xnorBA
 6c xorBandAC
@@ -162,8 +180,10 @@
 7c A?nandBC:B
 7d nandCxnorBA
 7e A?nandBC:orBC
-7f nandABC
-80 andABC
+### 7f nandABC
+7f nandAnandBC
+### 80 andABC
+80 andAandBC
 81 A?andBC:norBC
 82 andCxnorBA
 83 A?andBC:!B
@@ -185,7 +205,8 @@
 93 xnorBandAC
 94 C?andBA:xorBA
 95 xnorCandBA
-96 orABC
+### 96 orABC ERROR: xorABC
+96 xorAxorBC
 97 A?xnorBC:nandBC
 98 A?xnorBC:andBC
 99 xnorCB
@@ -267,7 +288,8 @@ e4 C?A:B
 e5 A?orBC:!C
 e6 A?orBC:xorBC
 e7 A?orBC:nandBC
-e8 majorABC
+### e8 majorABC
+e8 A?orBC:andBC
 e9 A?orBC:xnorBC
 ea orCandBA
 eb orCxnorBA
