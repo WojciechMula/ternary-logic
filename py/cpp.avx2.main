@@ -1,0 +1,19 @@
+// Generated automatically, plase do not edit
+#pragma once
+#include <immintrin.h>
+
+namespace ternarylogic {
+
+    namespace avx2 {
+
+        template<unsigned k> %(TYPE)s ternary(const %(TYPE)s, const %(TYPE)s, const %(TYPE)s) {
+            static_assert(k < 256, "Unspecified ternary function");
+        } 
+
+        %(FUNCTIONS)s
+
+    } // namespace avx2
+
+} // namespace ternarylogic
+
+// eof

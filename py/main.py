@@ -98,26 +98,48 @@ class CodeGenerator:
     def setup(self):
         import lib.lowering_sse
         import lib.assembler_sse
+        import lib.assembler_avx2
 
         if self.options.target == Target_SSE:
             self.lowering   = lib.lowering_sse.transform
             self.assembler  = lib.assembler_sse.AssemblerSSE
 
         elif self.options.target == Target_AVX2:
+            self.lowering   = lib.lowering_sse.transform
+            self.assembler  = lib.assembler_avx2.AssemblerAVX2
             pass
 
         elif self.options.target == Target_X86:
             pass
 
+        with get_file(self.get_function_file()) as f:
+            self.function_pattern = f.read()
+
+        with get_file(self.get_main_file()) as f:
+            self.main_pattern = f.read()
+
+        self.global_indent = get_indent(self.main_pattern, '%(FUNCTIONS)s')
+        self.body_indent   = get_indent(self.function_pattern, '%(BODY)s')
+
+
+    def get_main_file(self):
         if self.options.language == Language_CPP:
-            with get_file('cpp.function') as f:
-                self.function_pattern = f.read()
+            if self.options.target == Target_SSE:
+                return 'cpp.sse.main'
+            elif self.options.target == Target_AVX2:
+                return 'cpp.avx2.main'
+            else:
+                assert False
 
-            with get_file('cpp.pattern') as f:
-                self.file_pattern = f.read()
+        elif self.options.language == Language_C:
+            pass
+        else:
+            assert False
 
-            self.global_indent = get_indent(self.file_pattern, '%(FUNCTIONS)s')
-            self.body_indent   = get_indent(self.function_pattern, '%(BODY)s')
+
+    def get_function_file(self):
+        if self.options.language == Language_CPP:
+            return 'cpp.function'
 
         elif self.options.language == Language_C:
             pass
@@ -164,7 +186,7 @@ class CodeGenerator:
             'FUNCTIONS' : indent_lines(result.splitlines(), self.global_indent)
         }
 
-        return self.file_pattern % params
+        return self.main_pattern % params
 
 
     run = generate

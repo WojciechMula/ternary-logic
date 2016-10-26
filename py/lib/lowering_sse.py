@@ -1,3 +1,5 @@
+# Transformation apply to both SSE and AVX.
+
 from ast import *
 
 def transform_binary(root):
@@ -12,6 +14,7 @@ def transform_binary(root):
         if root.op in ('or', 'xor'):
             return Binary(root.op, a, b)
 
+        # nor/nand/xnor are not supported
         elif root.op == 'nor':
             return Negation(Binary('or', a, b))
         elif root.op == 'nand':
@@ -19,6 +22,7 @@ def transform_binary(root):
         elif root.op == 'xnor':
             return Negation(Binary('xor', a, b))
         elif root.op == 'and':
+            # expliting existance of the notand instruction
             if isinstance(a, Negation):
                 return Binary('notand', a.value, b)
             elif isinstance(b, Negation):
@@ -27,6 +31,7 @@ def transform_binary(root):
                 return Binary(root.op, a, b)
 
     if isinstance(root, Condition):
+        # express condition as logic expression x?y:z <=> (x and y) or (not x and y)
         var   = transform_binary(root.var)
         true  = transform_binary(root.true)
         false = transform_binary(root.false)
@@ -43,6 +48,7 @@ def transform_binary(root):
 
 
 def transform_negations(root):
+    # since SSE/AVX has no negation it must be expresed with x xor 1
 
     def negate(node):
         ones = Constant(True)

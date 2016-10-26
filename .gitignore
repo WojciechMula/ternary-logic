@@ -1,2 +1,4 @@
 validate_sse
+validate_avx2
 ternary_sse.cpp
+ternary_avx2.cpp
