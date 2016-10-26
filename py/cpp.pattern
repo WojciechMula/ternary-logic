@@ -6,7 +6,9 @@ namespace ternarylogic {
 
     namespace sse {
 
-        template<unsigned> __m128i ternary(const __m128i, const __m128i, const __m128i) {} 
+        template<unsigned k> %(TYPE)s ternary(const %(TYPE)s, const %(TYPE)s, const %(TYPE)s) {
+            static_assert(k < 256, "Unspecified ternary function");
+        } 
 
         %(FUNCTIONS)s
 

@@ -160,6 +160,7 @@ class CodeGenerator:
                 result += self.generate_single(code, expr)
 
         params = {
+            'TYPE'      : self.assembler().type,
             'FUNCTIONS' : indent_lines(result.splitlines(), self.global_indent)
         }
 
