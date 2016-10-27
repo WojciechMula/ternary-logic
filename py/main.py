@@ -98,12 +98,12 @@ class CodeGenerator:
         import lib.assembler_avx2
 
         if self.options.target == Target_SSE:
-            self.lowering   = lib.lowering_sse.transform
-            self.assembler  = lib.assembler_sse.AssemblerSSE
+            self.lowering  = lib.lowering_sse.transform
+            self.assembler_class = lib.assembler_sse.AssemblerSSE
 
         elif self.options.target == Target_AVX2:
-            self.lowering   = lib.lowering_sse.transform
-            self.assembler  = lib.assembler_avx2.AssemblerAVX2
+            self.lowering = lib.lowering_sse.transform
+            self.assembler_class = lib.assembler_avx2.AssemblerAVX2
             pass
 
         with get_file(self.get_function_file()) as f:
@@ -153,12 +153,12 @@ class CodeGenerator:
         lowered = self.lowering(expr)
         comment = "code=0x%02x, function=%s, lowered=%s" % (code, expr, lowered)
 
-        from lib.generate import Generator
-        g = Generator(lowered, self.assembler())
+        from lib.bodygen import BodyGenerator
+        g = BodyGenerator(lowered, self.assembler_class())
         body = g.run()
 
         params = {
-            'TYPE'  : self.assembler().type,
+            'TYPE'  : self.assembler_class().type,
             'NAME'  : self.options.name,
             'CODE'  : code,
             'BODY'  : indent_lines(body, self.body_indent),
@@ -176,7 +176,7 @@ class CodeGenerator:
                 result += self.generate_single(code, expr)
 
         params = {
-            'TYPE'      : self.assembler().type,
+            'TYPE'      : self.assembler_class().type,
             'FUNCTIONS' : indent_lines(result.splitlines(), self.global_indent)
         }
 
