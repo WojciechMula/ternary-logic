@@ -33,17 +33,28 @@ def parse_args(args):
     parser.add_option(
         "--name",
         default="ternary",
-        help="function pattern name"
+        help="function name"
+    )
+
+    parser.add_option(
+        "-o",
+        dest="filename",
+        help="output file"
     )
 
     (options, rest) = parser.parse_args(args)
+    if options.filename is None:
+        parser.error("-o is required")
+
     if options.language is None:
         parser.error("--language is required")
+
     if options.target is None:
         parser.error("--target is required")
 
     if options.language.lower() in ('cpp', 'c++'):
         options.language = Language_CPP
+
     elif options.language.lower() in ('c'):
         options.language = Language_C
     else:
@@ -188,7 +199,9 @@ class CodeGenerator:
 def execute(options):
 
     gen = CodeGenerator(options)
-    print gen.run()
+    with open(options.filename, 'wt') as f:
+        f.write(gen.run())
+        print "%s created" % (options.filename)
 
 
 if __name__ == '__main__':

@@ -11,12 +11,10 @@ validate_avx2: validate_avx2.cpp ternary_avx2.cpp
 	$(CXX) $(FLAGS) -mavx2 validate_avx2.cpp -o $@
 
 ternary_sse.cpp: $(PYDEPS) py/cpp.* py/intel.txt
-	python py/main.py --language=cpp --target=sse > tmp
-	mv tmp $@
+	python py/main.py --language=cpp --target=sse -o $@
 
 ternary_avx2.cpp: $(PYDEPS) py/cpp.* py/intel.txt
-	python py/main.py --language=cpp --target=avx2 > tmp
-	mv tmp $@
+	python py/main.py --language=cpp --target=avx2 -o $@
 
 clean:
 	rm -f $(ALL)
