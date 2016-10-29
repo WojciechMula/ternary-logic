@@ -1,4 +1,6 @@
 validate_sse
 validate_avx2
+validate_xop
 ternary_sse.cpp
 ternary_avx2.cpp
+ternary_xop.cpp

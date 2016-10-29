@@ -53,7 +53,11 @@ class BodyGenerator:
                 assert False, "unsupported op=%s" % node.op
 
         elif isinstance(node, Condition):
-            assert False
+            cond  = self.emit(node.var)
+            true  = self.emit(node.true)
+            false = self.emit(node.false)
+
+            var, expr = self.assembler.add_condition(cond, true, false)
 
         assert var != None
 

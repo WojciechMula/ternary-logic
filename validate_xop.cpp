@@ -2,18 +2,18 @@
 #include <cstdio>
 #include <cstdint>
 
-#include "ternary_avx2.cpp"
+#include "ternary_xop.cpp"
 
 template <unsigned K>
 void validate() {
-    const __m256i A = _mm256_set1_epi16(0xf0); // 0b1111_0000
-    const __m256i B = _mm256_set1_epi16(0xcc); // 0b1100_1100
-    const __m256i C = _mm256_set1_epi16(0xaa); // 0b1010_1010
+    const __m128i A = _mm_set1_epi16(0xf0); // 0b1111_0000
+    const __m128i B = _mm_set1_epi16(0xcc); // 0b1100_1100
+    const __m128i C = _mm_set1_epi16(0xaa); // 0b1010_1010
 
-    const __m256i R = ternarylogic::avx2::ternary<K>(C, B, A);
+    const __m128i R = ternarylogic::xop::ternary<K>(C, B, A);
 
     const uint8_t expected = K;
-    const uint8_t result   = _mm256_extract_epi32(R, 0);
+    const uint8_t result   = _mm_extract_epi16(R, 0);
 
     if (result != expected) {
         printf("result = %02x, expected = %02x\n", result, expected);

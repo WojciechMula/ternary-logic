@@ -17,7 +17,7 @@ void validate() {
 
     if (result != expected) {
         printf("result = %02x, expected = %02x\n", result, expected);
-        //exit(1);
+        exit(1);
     }
 }
 

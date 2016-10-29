@@ -9,6 +9,7 @@ Language_C      = 2
 
 Target_SSE      = 10
 Target_AVX2     = 20
+Target_XOP      = 30
 
 
 def main():
@@ -27,7 +28,7 @@ def parse_args(args):
 
     parser.add_option(
         "--target",
-        help="choose target (SSE, AVX2)"
+        help="choose target (SSE, AVX2, XOP)"
     )
 
     parser.add_option(
@@ -65,8 +66,10 @@ def parse_args(args):
         options.target = Target_SSE
     elif options.target.lower() == 'avx2':
         options.target = Target_AVX2
+    elif options.target.lower() == 'xop':
+        options.target = Target_XOP
     else:
-        valid = ('sse', 'avx2')
+        valid = ('sse', 'avx2', 'xop')
         parser.error("--target expects: %s" % ', '.join(valid))
 
     return options
@@ -105,8 +108,10 @@ class CodeGenerator:
 
     def setup(self):
         import lib.lowering_sse
+        import lib.lowering_xop
         import lib.assembler_sse
         import lib.assembler_avx2
+        import lib.assembler_xop
 
         if self.options.target == Target_SSE:
             self.lowering  = lib.lowering_sse.transform
@@ -115,7 +120,10 @@ class CodeGenerator:
         elif self.options.target == Target_AVX2:
             self.lowering = lib.lowering_sse.transform
             self.assembler_class = lib.assembler_avx2.AssemblerAVX2
-            pass
+
+        elif self.options.target == Target_XOP:
+            self.lowering = lib.lowering_xop.transform
+            self.assembler_class = lib.assembler_xop.AssemblerXOP
 
         with get_file(self.get_function_file()) as f:
             self.function_pattern = f.read()
@@ -133,6 +141,8 @@ class CodeGenerator:
                 return 'cpp.sse.main'
             elif self.options.target == Target_AVX2:
                 return 'cpp.avx2.main'
+            elif self.options.target == Target_XOP:
+                return 'cpp.xop.main'
             else:
                 assert False
 
@@ -199,8 +209,9 @@ class CodeGenerator:
 def execute(options):
 
     gen = CodeGenerator(options)
+    res = gen.run()
     with open(options.filename, 'wt') as f:
-        f.write(gen.run())
+        f.write(res)
         print "%s created" % (options.filename)
 
 

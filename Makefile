@@ -1,6 +1,6 @@
 FLAGS=-std=c++11 -O2 -Wall -pedantic
 PYDEPS=py/*.py py/lib/*.py
-ALL=validate_sse validate_avx2
+ALL=validate_sse validate_avx2 validate_xop
 
 all: $(ALL)
 
@@ -10,11 +10,17 @@ validate_sse: validate_sse.cpp ternary_sse.cpp
 validate_avx2: validate_avx2.cpp ternary_avx2.cpp
 	$(CXX) $(FLAGS) -mavx2 validate_avx2.cpp -o $@
 
-ternary_sse.cpp: $(PYDEPS) py/cpp.* py/intel.txt
+validate_xop: validate_xop.cpp ternary_xop.cpp
+	$(CXX) $(FLAGS) -mxop validate_xop.cpp -o $@
+
+ternary_sse.cpp: $(PYDEPS) py/cpp.function py/cpp.sse.main py/intel.txt
 	python py/main.py --language=cpp --target=sse -o $@
 
-ternary_avx2.cpp: $(PYDEPS) py/cpp.* py/intel.txt
+ternary_avx2.cpp: $(PYDEPS) py/cpp.function py/cpp.avx2.main py/intel.txt
 	python py/main.py --language=cpp --target=avx2 -o $@
+
+ternary_xop.cpp: $(PYDEPS) py/cpp.function py/cpp.xop.main py/intel.txt
+	python py/main.py --language=cpp --target=xop -o $@
 
 clean:
 	rm -f $(ALL)

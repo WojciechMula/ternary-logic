@@ -42,6 +42,3 @@ class AssemblerSSE(Assembler):
         expr = '%s %s = _mm_andnot_si128(%s, %s);' % (self.const_type, var, var1, var2)
 
         return (var, expr)
-
-    def add_not(self, var):
-        pass
