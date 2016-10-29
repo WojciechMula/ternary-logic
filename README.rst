@@ -14,8 +14,10 @@ boolean function for each bit of operands.  The function is given as
 __ https://software.intel.com/sites/landingpage/IntrinsicsGuide/#
 
 This repository contains a kind of library which allows a programmer to
-use ternary functions in SSE and AVX2 in similar manner, by choosing the
-function by its number.
+use ternary functions in SSE, XOP__ and AVX2 in similar manner, by
+choosing the function by its number.
+
+__ https://en.wikipedia.org/wiki/XOP_instruction_set
 
 In native AVX512F code you would write::
 
@@ -78,9 +80,9 @@ Usage
 
 You need ``python`` and ``make``.
 
-Type ``make``, then two files will be generated ``ternary_sse.cpp`` and
-``ternary_avx2.cpp``.  You can include them directly into your
-application.
+Type ``make``, then three files will be generated ``ternary_sse.cpp``,
+``ternary_avx2.cpp`` and ``ternary_xop.cpp``.  You can include them
+directly into your application.
 
 Programs ``validate_sse`` and ``validate_avx2`` test if all generated
 functions are correct.
@@ -90,8 +92,6 @@ What's missing?
 -----------------------------------------------------------
 
 * Support for C language.
-* Target for `AMD XOP extension`__, it has ``vpcmov`` instruction,
-  the condition operator.
 * I strongly believe that Intel published the best functions,
   but maybe some of them could be simplified?
 * Maybe C++ code should be written in another way? ("And we all
@@ -100,12 +100,10 @@ What's missing?
 
 All PRs are warmly welcome!
 
-__ https://en.wikipedia.org/wiki/XOP_instruction_set
-
 
 See also
 -----------------------------------------------------------
 
-* **Samuel Neves** (@snever) published cool C++ library for
+* **Samuel Neves** (@sneves) published cool C++ library for
   dealing with function numbers using constexpr. Check it out.
   https://github.com/sneves/avx512-utils
