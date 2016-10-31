@@ -65,7 +65,8 @@
 0b C?!A:norBA
 0c andB!A
 0d B?!A:norAC
-0e norAnorBC
+### 0e norAnorBC -> simplified
+0e xor!AandBC
 0f !A
 10 andAnorBC
 11 norCB
