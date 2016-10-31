@@ -59,7 +59,8 @@
 05 norCA
 06 norAxnorBC
 07 norAandBC
-08 norAnandBC
+### 08 norAnandBC -> simplified
+08 and!AandBC
 09 norAxorBC
 0a andC!A
 0b C?!A:norBA
