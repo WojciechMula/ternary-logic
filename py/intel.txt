@@ -89,7 +89,8 @@
 1d B?!A:!C
 1e xorAorBC
 1f nandAorBC
-20 norBnandAC
+### 20 norBnandAC -> simplified
+20 andAand!BC
 21 norBxorAC
 22 andC!B
 23 C?!B:norBA
