@@ -311,5 +311,6 @@ fa orCA
 fb nandBnorAC
 fc orBA
 fd nandCnorBA
-fe orABC
+### fe orABC
+fe orAorBC
 ff TRUE

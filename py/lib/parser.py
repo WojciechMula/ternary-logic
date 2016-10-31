@@ -36,20 +36,21 @@ def expression(lexer):
                 b = expression(lexer)
                 ret = Binary(op, a, b)
 
-                if lexer.peek() in ['A', 'B', 'C']:
-                    ret = Binary(op, Variable(lexer.peek()), ret)
-                    lexer.consume()
-
                 return ret
 
+        assert False, "unknown function"
 
-def parse(expr):
-    if expr == 'TRUE':
+
+def parse(s):
+    if s == 'TRUE':
         return Constant(True)
 
-    if expr == 'FALSE':
+    if s == 'FALSE':
         return Constant(False)
 
-    L = Lexer(expr)
-    return expression(L)
+    L = Lexer(s)
+    expr = expression(L)
+    assert L.eof()
+
+    return expr
 
