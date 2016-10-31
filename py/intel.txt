@@ -64,7 +64,8 @@
 08 and!AandBC
 09 norAxorBC
 0a andC!A
-0b C?!A:norBA
+### 0b C?!A:norBA -> simplified
+0b and!AnandB!C
 0c andB!A
 0d B?!A:norAC
 ### 0e norAnorBC -> simplified
