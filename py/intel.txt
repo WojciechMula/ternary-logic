@@ -333,7 +333,8 @@ d8 C?B:A
 d9 orxnorBCandAB
 da B?orAC:xorAC
 db B?orAC:nandAC
-dc C?B:orBA
+### dc C?B:orBA -> simplified: B or (A and !C)
+dc orBandA!C
 dd orB!C
 de orBxorAC
 df orBnandAC
