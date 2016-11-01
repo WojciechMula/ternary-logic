@@ -257,7 +257,8 @@ b6 B?xnorAC:orAC
 b7 nandBxorAC
 b8 B?C:A
 b9 C?orBA:!B
-ba B?C:orAC
+### ba B?C:orAC -> simplified
+ba orCandA!B
 bb orC!B
 bc C?orBA:xorBA
 bd C?orBA:nandBA
