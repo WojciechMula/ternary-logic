@@ -309,7 +309,8 @@ eb orCxnorBA
 ec orBandAC
 ed orBxnorAC
 ee orCB
-ef nandAnorBC
+### ef nandAnorBC -> simplified
+ef or!AorBC
 f0 A
 f1 orAnorBC
 ### f2 B?A:orAC -> simplified
