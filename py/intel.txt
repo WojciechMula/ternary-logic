@@ -323,7 +323,8 @@ f9 orAxnorBC
 fa orCA
 fb nandBnorAC
 fc orBA
-fd nandCnorBA
+### fd nandCnorBA -> simplified
+fd or!CorAB
 ### fe orABC
 fe orAorBC
 ff TRUE
