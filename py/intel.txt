@@ -159,7 +159,8 @@
 ### 4f B?nandAC:!A -> simplified
 4f or!AandB!C
 50 andA!C
-51 A?!C:norBC
+### 51 A?!C:norBC -> simplified: (B nor C) or (A and !C)
+51 ornorBCandA!C
 52 C?norBA:A
 53 A?!C:!B
 54 norCnorBA
