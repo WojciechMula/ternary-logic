@@ -185,7 +185,8 @@
 ### 71 A?nandBC:norBC -> simplified: (B nor C) or (A and (B xor C))
 71 ornorBCandAxorBC
 72 C?!B:A
-73 A?nandBC:!B
+### 73 A?nandBC:!B -> simplified: !B or (A and !C)
+73 or!BandA!C
 74 B?!C:A
 75 A?nandBC:!C
 76 B?!C:orAC
