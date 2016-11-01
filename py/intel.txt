@@ -121,7 +121,8 @@
 3a A?!B:C
 3b C?nandBA:!B
 3c xorBA
-3d C?xorBA:nandBA
+### 3d C?xorBA:nandBA
+3d A?!B:orB!C
 3e A?!B:orBC
 3f nandBA
 40 norCnandBA
