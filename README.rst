@@ -84,16 +84,17 @@ Type ``make``, then three files will be generated ``ternary_sse.cpp``,
 ``ternary_avx2.cpp`` and ``ternary_xop.cpp``.  You can include them
 directly into your application.
 
-Programs ``validate_sse`` and ``validate_avx2`` test if all generated
-functions are correct.
+Programs ``validate_sse``, ``validate_avx2`` and ``validate_xop``
+test if all generated functions are correct.
 
 
 What's missing?
 -----------------------------------------------------------
 
 * Support for C language.
-* I strongly believe that Intel published the best functions,
-  but maybe some of them could be simplified?
+* (I strongly believe that Intel published the best functions,
+  but maybe some of them could be simplified?) Well, so far
+  I mananged to simplify 66 of them.
 * Maybe C++ code should be written in another way? ("And we all
   know that **someone else's** C++ code is a complete mess almost
   by definition.")
