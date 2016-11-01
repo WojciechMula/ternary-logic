@@ -317,7 +317,8 @@ ce orBnandAC
 cf orB!A
 ### d0 C?andBA:A -> simplified
 d0 andAorB!C
-d1 B?A:!C
+### d1 B?A:!C -> no condition
+d1 ornorBCandAB
 d2 B?A:xorAC
 d3 B?A:nandAC
 d4 C?andBA:orBA
