@@ -16,8 +16,6 @@ def expression(lexer):
             lexer.consume()
             false = expression(lexer)
 
-            assert(lexer.eof())
-
             return Condition(v, true, false)
         else:
             assert(lexer.eof)

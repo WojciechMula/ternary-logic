@@ -182,7 +182,8 @@
 6e B?nandAC:C
 6f nandAxnorBC
 70 andAnandBC
-71 A?nandBC:norBC
+### 71 A?nandBC:norBC -> simplified: (B nor C) or (A and (B xor C))
+71 ornorBCandAxorBC
 72 C?!B:A
 73 A?nandBC:!B
 74 B?!C:A
