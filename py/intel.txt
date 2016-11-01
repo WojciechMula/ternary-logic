@@ -118,7 +118,7 @@
 30 andA!B
 ### 31 A?!B:norBC -> simplified
 31 ornorBCandA!B
-### 32 norBnorAC -> simplified !B and (A or (!A and C))
+### 32 norBnorAC -> simplified: !B and (A or (!A and C))
 32 and!BorAand!AC
 33 !B
 34 B?norAC:A
@@ -128,7 +128,8 @@
 38 A?!B:andBC
 39 A?!B:xnorBC
 3a A?!B:C
-3b C?nandBA:!B
+### 3b C?nandBA:!B -> simplified: !B or (!A and B and C)
+3b or!Band!AandBC
 3c xorBA
 ### 3d C?xorBA:nandBA -> simplified
 3d A?!B:orB!C
