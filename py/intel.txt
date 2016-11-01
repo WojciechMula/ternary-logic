@@ -109,7 +109,8 @@
 ### 2f C?nandBA:!A -> simplified
 2f or!Aand!BC
 30 andA!B
-31 A?!B:norBC
+### 31 A?!B:norBC -> simplified
+31 ornorBCandA!B
 32 norBnorAC
 33 !B
 34 B?norAC:A
