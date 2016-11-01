@@ -287,7 +287,8 @@ b5 C?A:nandBA
 b6 B?xnorAC:orAC
 b7 nandBxorAC
 b8 B?C:A
-b9 C?orBA:!B
+### b9 C?orBA:!B -> simplified: (B xor C) or (A nad !B)
+b9 orxnorBCandA!B
 ### ba B?C:orAC -> simplified
 ba orCandA!B
 bb orC!B
