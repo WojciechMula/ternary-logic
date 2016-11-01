@@ -250,7 +250,8 @@
 ### 96 orABC ERROR: xorABC
 96 xorAxorBC
 97 A?xnorBC:nandBC
-98 A?xnorBC:andBC
+### 98 A?xnorBC:andBC -> simplified: (B and C) or (A and (B nor C))
+98 orandBCandAnorBC
 99 xnorCB
 9a A?xnorBC:C
 9b B?C:nandAC
