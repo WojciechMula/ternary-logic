@@ -218,7 +218,8 @@
 ### 8a A?andBC:C -> simplified: (B and C) or (!A and C)
 8a orandBCand!AC
 8b B?C:!A
-8c A?andBC:B
+### 8c A?andBC:B -> simplified: (B and C) or (!A and B)
+8c orandBCand!AB
 8d C?B:!A
 8e A?andBC:orBC
 8f nandAnandBC
