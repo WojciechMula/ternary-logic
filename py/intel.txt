@@ -139,7 +139,8 @@
 ### 40 norCnandBA -> simplified
 40 and!CandBA
 41 norCxorBA
-42 C?norBA:andBA
+### 42 C?norBA:andBA -> simplified (B xor C) and !(A xor B)
+42 andxorBCxnorAB
 ### 43 C?norBA:xnorBA -> simplified
 43 A?andB!C:!B
 44 andB!C
