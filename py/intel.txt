@@ -250,7 +250,8 @@ b1 C?A:!B
 b2 B?andAC:orAC
 ### b3 nandBnandAC -> simplified
 b3 or!BandAC
-b4 B?xnorAC:A
+### b4 B?xnorAC:A -> simplified
+b4 xorAandB!C
 b5 C?A:nandBA
 b6 B?xnorAC:orAC
 b7 nandBxorAC
