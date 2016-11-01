@@ -111,7 +111,8 @@
 2c B?!A:andAC
 ### 2d B?!A:xnorAC -> simplified: (B or !C) xor A
 2d xorAorB!C
-2e B?!A:C
+### 2e B?!A:C -> simplified: (B or C) xor (A and B)
+2e xororBCandAB
 ### 2f C?nandBA:!A -> simplified
 2f or!Aand!BC
 30 andA!B
