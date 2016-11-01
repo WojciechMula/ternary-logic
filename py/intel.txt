@@ -261,7 +261,8 @@
 9f nandAxorBC
 a0 andCA
 a1 A?C:norBC
-a2 B?andAC:C
+### a2 B?andAC:C -> simplified: C and (A or !B)
+a2 andCorA!B
 a3 A?C:!B
 a4 B?xnorAC:andAC
 a5 xnorCA
