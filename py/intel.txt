@@ -98,7 +98,8 @@
 22 andC!B
 ### 23 C?!B:norBA -> simplified: !B and ((A and C) or !A)
 23 and!Bor!AandAC
-24 B?norAC:andAC
+### 24 B?norAC:andAC -> simplified: (B xor C) and (A xor B)
+24 andxorBCxorAB
 ### 25 B?norAC:xnorAC -> simplified
 25 A?and!BC:!C
 26 B?norAC:C
