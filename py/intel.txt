@@ -106,7 +106,8 @@
 2c B?!A:andAC
 2d B?!A:xnorAC
 2e B?!A:C
-2f C?nandBA:!A
+### 2f C?nandBA:!A -> simplified
+2f or!Aand!BC
 30 andA!B
 31 A?!B:norBC
 32 norBnorAC
