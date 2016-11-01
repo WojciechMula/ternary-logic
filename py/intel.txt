@@ -121,11 +121,12 @@
 3a A?!B:C
 3b C?nandBA:!B
 3c xorBA
-### 3d C?xorBA:nandBA
+### 3d C?xorBA:nandBA -> simplified
 3d A?!B:orB!C
 3e A?!B:orBC
 3f nandBA
-40 norCnandBA
+### 40 norCnandBA -> simplified
+40 and!CandBA
 41 norCxorBA
 42 C?norBA:andBA
 43 C?norBA:xnorBA
