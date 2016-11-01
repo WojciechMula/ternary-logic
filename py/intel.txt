@@ -195,7 +195,8 @@
 78 xorAandBC
 79 A?nandBC:xnorBC
 7a A?nandBC:C
-7b nandBxnorAC
+### 7b nandBxnorAC -> simplified: !B or (A xor C)
+7b or!BxorAC
 7c A?nandBC:B
 7d nandCxnorBA
 7e A?nandBC:orBC
