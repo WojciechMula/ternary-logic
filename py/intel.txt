@@ -139,7 +139,8 @@
 48 andBxorAC
 49 B?xorAC:norAC
 4a C?!A:andBA
-4b B?xorAC:!A
+### 4b B?xorAC:!A -> simplified
+4b xorAor!BC
 4c andBnandAC
 4d B?nandAC:norAC
 4e C?!A:B
