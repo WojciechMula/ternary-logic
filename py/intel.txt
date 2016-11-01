@@ -182,7 +182,8 @@
 61 A?xorBC:norBC
 62 C?!B:andBA
 63 A?xorBC:!B
-64 B?!C:andAC
+### 64 B?!C:andAC -> simplified: (B xor C) and (A or B)
+64 andxorBCorAB
 65 A?xorBC:!C
 66 xorCB
 ### 67 A?xorBC:nandBC -> simplified
