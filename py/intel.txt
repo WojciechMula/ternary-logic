@@ -292,7 +292,8 @@ b9 orxnorBCandA!B
 ### ba B?C:orAC -> simplified
 ba orCandA!B
 bb orC!B
-bc C?orBA:xorBA
+### bc C?orBA:xorBA -> simplified
+bc A?nandB!C:B
 bd C?orBA:nandBA
 be orCxorBA
 bf orCnandBA
