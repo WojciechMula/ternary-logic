@@ -163,7 +163,8 @@
 51 ornorBCandA!C
 52 C?norBA:A
 53 A?!C:!B
-54 norCnorBA
+### 54 norCnorBA -> simplified: !C and (A or B)
+54 and!CorAB
 55 !C
 56 xorCorBA
 57 nandCorBA
