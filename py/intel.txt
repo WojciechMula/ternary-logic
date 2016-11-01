@@ -188,7 +188,8 @@
 ### 73 A?nandBC:!B -> simplified: !B or (A and !C)
 73 or!BandA!C
 74 B?!C:A
-75 A?nandBC:!C
+### 75 A?nandBC:!C -> simplified: !C or (A and !B)
+75 or!CandA!B
 76 B?!C:orAC
 77 nandCB
 78 xorAandBC
