@@ -322,7 +322,8 @@ d1 ornorBCandAB
 ### d2 B?A:xorAC -> simplified: A xor (!B and C)
 d2 xorAand!BC
 d3 B?A:nandAC
-d4 C?andBA:orBA
+### d4 C?andBA:orBA -> simplified: (B and !C) or (A and (B xor C))
+d4 orandB!CandAxnorBC
 ### d5 nandCnandBA -> simplified
 d5 or!CandAB
 d6 C?xnorBA:orBA
