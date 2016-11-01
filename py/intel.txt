@@ -202,9 +202,9 @@
 7d nandCxnorBA
 ### 7e A?nandBC:orBC -> simplified (A xor (B and C)) or (!A and (B or C))
 7e orxorAandBCand!AorBC
-### 7f nandABC
+### 7f nandABC -> conversion from 3-arg form into 2-arg form
 7f nandAnandBC
-### 80 andABC
+### 80 andABC -> conversion from 3-arg form into 2-arg form
 80 andAandBC
 81 A?andBC:norBC
 82 andCxnorBA
@@ -215,7 +215,8 @@
 87 xnorAandBC
 88 andCB
 89 B?C:norAC
-8a A?andBC:C
+### 8a A?andBC:C -> simplified: (B and C) or (!A and C)
+8a orandBCand!AC
 8b B?C:!A
 8c A?andBC:B
 8d C?B:!A
