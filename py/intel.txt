@@ -84,7 +84,8 @@
 ### 17 !A?orBC:andBC -> simplified: (B nor C) or (!A and (B xor C))
 17 ornorBCand!AxorBC
 18 A?norBC:andBC
-19 A?norBC:xnorBC
+### 19 A?norBC:xnorBC -> simplified: !((B xor C) xor (A and B and C))
+19 !xorxorBCandAandBC
 1a A?norBC:C
 1b C?!A:!B
 1c A?norBC:B
