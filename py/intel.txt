@@ -351,7 +351,8 @@ e7 orxorBCxor!AC
 ### e8 majorABC -> rewritten
 ### e8 A?orBC:andBC -> simplified: (B and C) or (A and (B xor C))
 e8 orandBCandAxorBC
-e9 A?orBC:xnorBC
+### e9 A?orBC:xnorBC -> simplified: ((B xor C) xor !A) or (A and B)
+e9 orxor!AxorBCandAB
 ea orCandBA
 eb orCxnorBA
 ec orBandAC
