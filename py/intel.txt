@@ -312,7 +312,8 @@ ca A?B:C
 cb B?orAC:!A
 cc B
 cd orBnorAC
-ce A?B:orBC
+### ce A?B:orBC -> simplified: B or !(A and C)
+ce orBnandAC
 cf orB!A
 ### d0 C?andBA:A -> simplified
 d0 andAorB!C
