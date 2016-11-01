@@ -144,7 +144,8 @@
 4c andBnandAC
 4d B?nandAC:norAC
 4e C?!A:B
-4f B?nandAC:!A
+### 4f B?nandAC:!A -> simplified
+4f or!AandB!C
 50 andA!C
 51 A?!C:norBC
 52 C?norBA:A
