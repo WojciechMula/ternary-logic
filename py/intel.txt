@@ -315,7 +315,8 @@ f1 orAnorBC
 ### f2 B?A:orAC -> simplified
 f2 orAand!BC
 f3 orA!B
-f4 C?A:orBA
+### f4 C?A:orBA -> simplified
+f4 orAandB!C
 f5 orA!C
 f6 orAxorBC
 f7 orAnandBC
