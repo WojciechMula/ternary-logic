@@ -162,7 +162,8 @@
 64 B?!C:andAC
 65 A?xorBC:!C
 66 xorCB
-67 A?xorBC:nandBC
+### 67 A?xorBC:nandBC -> simplified
+67 orxorBCnorAB
 68 A?xorBC:andBC
 ### 69 xnorABC ERROR?
 69 xnorAxorBC
