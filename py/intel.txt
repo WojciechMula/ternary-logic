@@ -67,10 +67,10 @@
 ### 0b C?!A:norBA -> simplified
 0b and!AnandB!C
 0c andB!A
-### 0d B?!A:norAC
+### 0d B?!A:norAC -> simplified
 0d and!Anand!BC
-### 0e norAnorBC -> simplified
-0e xor!AandBC
+### 0e norAnorBC -> simplified: !A and (B or C)
+0e and!AorBC
 0f !A
 10 andAnorBC
 11 norCB
