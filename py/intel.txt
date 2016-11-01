@@ -129,7 +129,8 @@
 40 and!CandBA
 41 norCxorBA
 42 C?norBA:andBA
-43 C?norBA:xnorBA
+### 43 C?norBA:xnorBA -> simplified
+43 A?andB!C:!B
 44 andB!C
 45 B?!C:norAC
 46 C?norBA:B
