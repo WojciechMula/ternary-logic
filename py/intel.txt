@@ -74,7 +74,8 @@
 0f !A
 10 andAnorBC
 11 norCB
-12 norBxnorAC
+### 12 norBxnorAC -> simplified: !B and (A xor C)
+12 and!BxorAC
 13 norBandAC
 14 norCxnorBA
 15 norCandBA
