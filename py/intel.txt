@@ -200,7 +200,8 @@
 ### 7c A?nandBC:B -> simplified: (B xor A) or (A and !C)
 7c orxorABandA!C
 7d nandCxnorBA
-7e A?nandBC:orBC
+### 7e A?nandBC:orBC -> simplified (A xor (B and C)) or (!A and (B or C))
+7e orxorAandBCand!AorBC
 ### 7f nandABC
 7f nandAnandBC
 ### 80 andABC
