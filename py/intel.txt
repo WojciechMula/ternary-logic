@@ -282,7 +282,8 @@ d1 B?A:!C
 d2 B?A:xorAC
 d3 B?A:nandAC
 d4 C?andBA:orBA
-d5 nandCnandBA
+### d5 nandCnandBA -> simplified
+d5 or!CandAB
 d6 C?xnorBA:orBA
 d7 nandCxorBA
 d8 C?B:A
@@ -301,7 +302,7 @@ e4 C?A:B
 e5 A?orBC:!C
 e6 A?orBC:xorBC
 e7 A?orBC:nandBC
-### e8 majorABC
+### e8 majorABC -> rewritten
 e8 A?orBC:andBC
 e9 A?orBC:xnorBC
 ea orCandBA
