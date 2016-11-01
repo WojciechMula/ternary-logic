@@ -11,7 +11,7 @@ def transform_binary(root):
         a = transform_binary(root.a)
         b = transform_binary(root.b)
 
-        if root.op in ('or', 'xor'):
+        if root.op in ('or', 'xor', 'notand'):
             return Binary(root.op, a, b)
 
         # nor/nand/xnor are not supported
