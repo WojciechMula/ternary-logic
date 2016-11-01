@@ -266,7 +266,8 @@ be orCxorBA
 bf orCnandBA
 c0 andBA
 c1 A?B:norBC
-c2 C?xnorBA:andBA
+### c2 C?xnorBA:andBA -> simplified
+c2 A?B:and!BC
 c3 xnorBA
 c4 C?andBA:B
 c5 A?B:!C
