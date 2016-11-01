@@ -109,7 +109,8 @@
 2a andCnandBA
 2b C?nandBA:norBA
 2c B?!A:andAC
-2d B?!A:xnorAC
+### 2d B?!A:xnorAC -> simplified: (B or !C) xor A
+2d xorAorB!C
 2e B?!A:C
 ### 2f C?nandBA:!A -> simplified
 2f or!Aand!BC
