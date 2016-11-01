@@ -80,8 +80,9 @@
 14 norCxnorBA
 15 norCandBA
 16 A?norBC:xorBC
-### 17 minorABC
-17 !A?orBC:andBC
+### 17 minorABC -> expressed using basic functions
+### 17 !A?orBC:andBC -> simplified: (B nor C) or (!A and (B xor C))
+17 ornorBCand!AxorBC
 18 A?norBC:andBC
 19 A?norBC:xnorBC
 1a A?norBC:C
