@@ -174,7 +174,8 @@
 ### 5b B?xorAC:nandAC -> simplified
 5b A?!C:or!BC
 5c A?!C:B
-5d B?nandAC:!C
+### 5d B?nandAC:!C -> simplified: !C or (!A and B)
+5d or!Cand!AB
 5e A?!C:orBC
 5f nandCA
 60 andAxorBC
