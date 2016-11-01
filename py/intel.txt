@@ -312,7 +312,8 @@ ee orCB
 ef nandAnorBC
 f0 A
 f1 orAnorBC
-f2 B?A:orAC
+### f2 B?A:orAC -> simplified
+f2 orAand!BC
 f3 orA!B
 f4 C?A:orBA
 f5 orA!C
