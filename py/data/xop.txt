@@ -1,0 +1,176 @@
+# functions found by find.py --target=XOP
+
+# (A ? 0 : (B xor C))
+06 A?0:xorBC
+# (B ? (A notand C) : B)
+08 B?notandAC:B
+# (B ? (A notand C) : (A xor 1))
+0b B?notandAC:xorA1
+# (C ? (A notand B) : (A xor 1))
+0d C?notandAB:xorA1
+# (A ? 0 : (B or C))
+0e A?0:orBC
+# (B ? 0 : (A xor C))
+12 B?0:xorAC
+# (C ? 0 : (A xor B))
+14 C?0:xorAB
+# (A ? (C notand (A xor B)) : (B xor C))
+16 A?notandCxorAB:xorBC
+# (B ? (A notand C) : (C notand A))
+18 B?notandAC:notandCA
+# (B ? (A notand C) : (C xor 1))
+19 B?notandAC:xorC1
+# (A ? (C notand (A xor B)) : C)
+1a A?notandCxorAB:C
+# (A ? (C notand (A xor B)) : B)
+1c A?notandCxorAB:B
+# (A ? (B notand C) : A)
+20 A?notandBC:A
+# (A ? (B notand C) : (B xor 1))
+23 A?notandBC:xorB1
+# (A ? (B notand C) : (C notand B))
+24 A?notandBC:notandCB
+# (A ? (B notand C) : (C xor 1))
+25 A?notandBC:xorC1
+# (A ? (B notand C) : (B xor C))
+26 A?notandBC:xorBC
+# (A ? (B notand C) : ((B xor 1) or C))
+2b A?notandBC:orxorB1C
+# (A ? (B notand C) : B)
+2c A?notandBC:B
+# (C ? (A xor B) : (A xor 1))
+2d C?xorAB:xorA1
+# (B ? (A notand B) : C)
+2e B?notandAB:C
+# (A ? (B notand C) : 1)
+2f A?notandBC:1
+# (C ? (B notand A) : (B xor 1))
+31 C?notandBA:xorB1
+# (A ? (B notand A) : (B notand C))
+32 A?notandBA:notandBC
+# (A ? (B notand A) : (C notand B))
+34 A?notandBA:notandCB
+# (B ? (A notand C) : A)
+38 B?notandAC:A
+# (C ? (A xor B) : (B xor 1))
+39 C?xorAB:xorB1
+# (A ? (B notand A) : C)
+3a A?notandBA:C
+# (B ? (A notand C) : 1)
+3b B?notandAC:1
+# (A ? (B notand A) : (B or C))
+3e A?notandBA:orBC
+# (A ? (C notand B) : A)
+40 A?notandCB:A
+# (A ? (C notand B) : (B notand C))
+42 A?notandCB:notandBC
+# (A ? (C notand B) : (B xor 1))
+43 A?notandCB:xorB1
+# (A ? (C notand B) : (C xor 1))
+45 A?notandCB:xorC1
+# (A ? (C notand B) : (B xor C))
+46 A?notandCB:xorBC
+# (A ? (C notand B) : C)
+4a A?notandCB:C
+# (A ? (C notand B) : (B or (C xor 1)))
+4d A?notandCB:orBxorC1
+# (C ? (A notand C) : B)
+4e C?notandAC:B
+# (A ? (C notand B) : 1)
+4f A?notandCB:1
+# (B ? (C notand A) : (C xor 1))
+51 B?notandCA:xorC1
+# (A ? (C notand A) : (B notand C))
+52 A?notandCA:notandBC
+# (A ? (C notand A) : (C notand B))
+54 A?notandCA:notandCB
+# (C ? (A notand B) : A)
+58 C?notandAB:A
+# (B ? (A xor C) : (C xor 1))
+59 B?xorAC:xorC1
+# (A ? (C notand A) : B)
+5c A?notandCA:B
+# (C ? (A notand B) : 1)
+5d C?notandAB:1
+# (A ? (C notand A) : (B or C))
+5e A?notandCA:orBC
+# (B ? (C notand A) : C)
+62 B?notandCA:C
+# (C ? (B notand A) : B)
+64 C?notandBA:B
+# (A ? (B xor C) : ((B xor 1) or C))
+6b A?xorBC:orxorB1C
+# (A ? (B xor C) : (B or (C xor 1)))
+6d A?xorBC:orBxorC1
+# (A ? (B xor C) : (B or C))
+6e A?xorBC:orBC
+# (A ? (B xor C) : 1)
+6f A?xorBC:1
+# (B ? (C notand A) : (A or (C xor 1)))
+71 B?notandCA:orAxorC1
+# (C ? (B notand C) : A)
+72 C?notandBC:A
+# (B ? (C notand A) : 1)
+73 B?notandCA:1
+# (B ? (C notand B) : A)
+74 B?notandCB:A
+# (C ? (B notand A) : 1)
+75 C?notandBA:1
+# (B ? (C notand B) : (A or C))
+76 B?notandCB:orAC
+# (B ? (A xor C) : (A or (C xor 1)))
+79 B?xorAC:orAxorC1
+# (A ? ((B and C) xor A) : C)
+7a A?xorandBCA:C
+# (B ? (A xor C) : 1)
+7b B?xorAC:1
+# (A ? ((B and C) xor A) : B)
+7c A?xorandBCA:B
+# (C ? (A xor B) : 1)
+7d C?xorAB:1
+# (A ? ((B and C) xor A) : (B or C))
+7e A?xorandBCA:orBC
+# (A ? ((B and C) xor A) : 1)
+7f A?xorandBCA:1
+# (A ? (B and C) : 1)
+8f A?andBC:1
+# (B ? C : (C notand A))
+98 B?C:notandCA
+# (B ? C : (A xor C))
+9a B?C:xorAC
+# (C ? B : (A xor B))
+9c C?B:xorAB
+# (A ? ((B notand A) xor C) : (B or C))
+9e A?xornotandBAC:orBC
+# (A ? C : (C notand B))
+a4 A?C:notandCB
+# (A ? C : 1)
+af A?C:1
+# (B ? (A and C) : 1)
+b3 B?andAC:1
+# (C ? A : (A xor B))
+b4 C?A:xorAB
+# (A ? (C or (A xor B)) : (B xor C))
+b6 A?orCxorAB:xorBC
+# (B ? C : 1)
+bb B?C:1
+# (A ? B : (B notand C))
+c2 A?B:notandBC
+# (A ? B : 1)
+cf A?B:1
+# (C ? (A and B) : 1)
+d5 C?andAB:1
+# (A ? (B or (A xor C)) : (B xor C))
+d6 A?orBxorAC:xorBC
+# (C ? B : 1)
+dd C?B:1
+# (A ? (B or C) : 1)
+ef A?orBC:1
+# (B ? A : 1)
+f3 B?A:1
+# (C ? A : 1)
+f5 C?A:1
+# (B ? (A or C) : 1)
+fb B?orAC:1
+# (C ? (A or B) : 1)
+fd C?orAB:1
