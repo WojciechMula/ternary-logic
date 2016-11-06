@@ -1,0 +1,141 @@
+# some functions from intel.txt optimized manually
+
+### 06 norAxnorBC -> simplified
+06 and!AxorBC
+### 08 norAnandBC -> simplified
+08 and!AandBC
+### 0b C?!A:norBA -> simplified
+0b and!AnandB!C
+### 0d B?!A:norAC -> simplified
+0d and!Anand!BC
+### 0e norAnorBC -> simplified: !A and (B or C)
+0e and!AorBC
+### 12 norBxnorAC -> simplified: !B and (A xor C)
+12 and!BxorAC
+### 17 minorABC -> expressed using basic functions
+### 17 !A?orBC:andBC -> simplified: (B nor C) or (!A and (B xor C))
+17 ornorBCand!AxorBC
+### 19 A?norBC:xnorBC -> simplified: !((B xor C) xor (A and B and C))
+19 !xorxorBCandAandBC
+### 20 norBnandAC -> simplified
+20 andAand!BC
+### 23 C?!B:norBA -> simplified: !B and ((A and C) or !A)
+23 and!Bor!AandAC
+### 24 B?norAC:andAC -> simplified: (B xor C) and (A xor B)
+24 andxorBCxorAB
+### 25 B?norAC:xnorAC -> simplified
+25 A?and!BC:!C
+### 2d B?!A:xnorAC -> simplified: (B or !C) xor A
+2d xorAorB!C
+### 2e B?!A:C -> simplified: (B or C) xor (A and B)
+2e xororBCandAB
+### 2f C?nandBA:!A -> simplified
+2f or!Aand!BC
+### 31 A?!B:norBC -> simplified
+31 ornorBCandA!B
+### 32 norBnorAC -> simplified: !B and (A or (!A and C))
+32 and!BorAand!AC
+### 3b C?nandBA:!B -> simplified: !B or (!A and B and C)
+3b or!Band!AandBC
+### 3d C?xorBA:nandBA -> simplified
+### 3d A?!B:orB!C -> simplified furher: (A xor B) or (A nor C)
+3d orxorABnorAC
+### 40 norCnandBA -> simplified
+40 and!CandBA
+### 42 C?norBA:andBA -> simplified: (B xor C) and !(A xor B)
+42 andxorBCxnorAB
+### 43 C?norBA:xnorBA -> simplified
+43 A?andB!C:!B
+### 45 B?!C:norAC -> simplified: !C and (!A or (A and B))
+45 and!Cor!AandAB
+### 4b B?xorAC:!A -> simplified
+4b xorAor!BC
+### 4f B?nandAC:!A -> simplified
+4f or!AandB!C
+### 51 A?!C:norBC -> simplified: (B nor C) or (A and !C)
+51 ornorBCandA!C
+### 54 norCnorBA -> simplified: !C and (A or B)
+54 and!CorAB
+### 5b B?xorAC:nandAC -> simplified
+5b A?!C:or!BC
+### 5d B?nandAC:!C -> simplified: !C or (!A and B)
+5d or!Cand!AB
+### 64 B?!C:andAC -> simplified: (B xor C) and (A or B)
+64 andxorBCorAB
+### 67 A?xorBC:nandBC -> simplified
+67 orxorBCnorAB
+### 71 A?nandBC:norBC -> simplified: (B nor C) or (A and (B xor C))
+71 ornorBCandAxorBC
+### 73 A?nandBC:!B -> simplified: !B or (A and !C)
+73 or!BandA!C
+### 75 A?nandBC:!C -> simplified: !C or (A and !B)
+75 or!CandA!B
+### 7b nandBxnorAC -> simplified: !B or (A xor C)
+7b or!BxorAC
+### 7c A?nandBC:B -> simplified: (B xor A) or (A and !C)
+7c orxorABandA!C
+### 7e A?nandBC:orBC -> simplified (A xor (B and C)) or (!A and (B or C))
+7e orxorAandBCand!AorBC
+### 7f nandABC -> conversion from 3-arg form into 2-arg form
+7f nandAnandBC
+### 80 andABC -> conversion from 3-arg form into 2-arg form
+80 andAandBC
+### 8a A?andBC:C -> simplified: (B and C) or (!A and C)
+8a orandBCand!AC
+### 8c A?andBC:B -> simplified: (B and C) or (!A and B)
+8c orandBCand!AB
+### 8e A?andBC:orBC -> simplified: (B and C) or (!A and (B xor C))
+8e orandBCand!AxorBC
+### 8f nandAnandBC -> simplified: (B and C) or !A
+8f or!AandBC
+### 98 A?xnorBC:andBC -> simplified: (B and C) or (A and (B nor C))
+98 orandBCandAnorBC
+### a2 B?andAC:C -> simplified: C and (A or !B)
+a2 andCorA!B
+### b3 nandBnandAC -> simplified
+b3 or!BandAC
+### b4 B?xnorAC:A -> simplified
+b4 xorAandB!C
+### b9 C?orBA:!B -> simplified: (B xor C) or (A nad !B)
+b9 orxnorBCandA!B
+### ba B?C:orAC -> simplified
+ba orCandA!B
+### bc C?orBA:xorBA -> simplified
+bc A?nandB!C:B
+### c2 C?xnorBA:andBA -> simplified
+c2 A?B:and!BC
+### ce A?B:orBC -> simplified: B or !(A and C)
+ce orBnandAC
+### d0 C?andBA:A -> simplified
+d0 andAorB!C
+### d1 B?A:!C -> no condition
+d1 ornorBCandAB
+### d2 B?A:xorAC -> simplified: A xor (!B and C)
+d2 xorAand!BC
+### d4 C?andBA:orBA -> simplified: (B and !C) or (A and (B xor C))
+d4 orandB!CandAxnorBC
+### d5 nandCnandBA -> simplified
+d5 or!CandAB
+### d9 B?orAC:!C -> simplified: !(B xor C) or (A and B)
+d9 orxnorBCandAB
+### dc C?B:orBA -> simplified: B or (A and !C)
+dc orBandA!C
+### e6 A?orBC:xorBC -> simplified: (B xor C) or (A and B)
+e6 orxorBCandAB
+### e7 A?orBC:nandBC -> simplified: (B xor C) or (!A xor C)
+e7 orxorBCxor!AC
+### e8 majorABC -> rewritten
+### e8 A?orBC:andBC -> simplified: (B and C) or (A and (B xor C))
+e8 orandBCandAxorBC
+### e9 A?orBC:xnorBC -> simplified: ((B xor C) xor !A) or (A and B)
+e9 orxor!AxorBCandAB
+### ef nandAnorBC -> simplified
+ef or!AorBC
+### f2 B?A:orAC -> simplified
+f2 orAand!BC
+### f4 C?A:orBA -> simplified
+f4 orAandB!C
+### fb nandBnorAC -> simplified
+fb orAor!BC
+### fd nandCnorBA -> simplified
+fd or!CorAB

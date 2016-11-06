@@ -163,16 +163,20 @@ class CodeGenerator:
 
 
     def load(self):
+        self.data = {}
         with get_file('data/intel.txt', 'rt') as f:
-            self.data = load(f)
+            self.data['intel'] = load(f)
 
-            assert(len(self.data) == 256)
+            assert(len(self.data['intel']) == 256)
+
+        with get_file('data/manually_optimized.txt', 'rt') as f:
+            self.data['optimized'] = load(f)
 
 
-    def generate_single(self, code, expr):
+    def generate_single(self, code, expr, source):
 
         lowered = self.lowering(expr)
-        comment = "code=0x%02x, function=%s, lowered=%s" % (code, expr, lowered)
+        comment = "code=0x%02x, function=%s, lowered=%s, set=%s" % (code, expr, lowered, source)
 
         from lib.bodygen import BodyGenerator
         g = BodyGenerator(lowered, self.assembler_class())
@@ -186,15 +190,30 @@ class CodeGenerator:
             'COMMENT' : comment
         }
 
-        return self.function_pattern % params
+        return (len(body), self.function_pattern % params)
 
 
     def generate(self):
         result = ''
         for code in xrange(256):
-            expr = self.data[code][1]
-            if expr:
-                result += self.generate_single(code, expr)
+            weight = 1e10 # It is rather unlikely that a 3-argument function would be expressed
+                          # by more than one million instructions. :)
+            src    = None
+
+            for name in self.data:
+                if code not in self.data[name]:
+                    continue
+
+                expr = self.data[name][code][1]
+                if expr:
+                    w, s = self.generate_single(code, expr, name)
+                    if w < weight:
+                        src    = s
+                        weight = w
+                        picked_set = name
+
+            assert src is not None
+            result += src
 
         params = {
             'TYPE'      : self.assembler_class().type,
