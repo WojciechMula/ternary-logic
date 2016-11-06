@@ -168,12 +168,17 @@ class CodeGenerator:
             self.data['intel'] = load(f)
 
             assert(len(self.data['intel']) == 256)
+            
 
-        with get_file('data/manually_optimized.txt', 'rt') as f:
-            self.data['optimized'] = load(f)
+        paths = {
+            'optimized': 'data/manually_optimized.txt',
+            'automat'  : 'data/sse_and_avx2.txt',
+            'xop'      : 'data/xop.txt',
+        }
 
-        with get_file('data/sse_and_avx2.txt', 'rt') as f:
-            self.data['automat'] = load(f)
+        for name, path in paths.iteritems():
+            with get_file(path, 'rt') as f:
+                self.data[name] = load(f)
 
 
     def generate_single(self, code, expr, source):
