@@ -57,51 +57,39 @@
 03 norBA
 04 andBnorAC
 05 norCA
-### 06 norAxnorBC -> simplified
-06 and!AxorBC
+06 norAxnorBC
 07 norAandBC
-### 08 norAnandBC -> simplified
-08 and!AandBC
+08 norAnandBC
 09 norAxorBC
 0a andC!A
-### 0b C?!A:norBA -> simplified
-0b and!AnandB!C
+0b C?!A:norBA
 0c andB!A
-### 0d B?!A:norAC -> simplified
-0d and!Anand!BC
-### 0e norAnorBC -> simplified: !A and (B or C)
-0e and!AorBC
+0d B?!A:norAC
+0e norAnorBC
 0f !A
 10 andAnorBC
 11 norCB
-### 12 norBxnorAC -> simplified: !B and (A xor C)
-12 and!BxorAC
+12 norBxnorAC
 13 norBandAC
 14 norCxnorBA
 15 norCandBA
 16 A?norBC:xorBC
 ### 17 minorABC -> expressed using basic functions
-### 17 !A?orBC:andBC -> simplified: (B nor C) or (!A and (B xor C))
-17 ornorBCand!AxorBC
+17 !A?orBC:andBC
 18 A?norBC:andBC
-### 19 A?norBC:xnorBC -> simplified: !((B xor C) xor (A and B and C))
-19 !xorxorBCandAandBC
+19 A?norBC:xnorBC
 1a A?norBC:C
 1b C?!A:!B
 1c A?norBC:B
 1d B?!A:!C
 1e xorAorBC
 1f nandAorBC
-### 20 norBnandAC -> simplified
-20 andAand!BC
+20 norBnandAC
 21 norBxorAC
 22 andC!B
-### 23 C?!B:norBA -> simplified: !B and ((A and C) or !A)
-23 and!Bor!AandAC
-### 24 B?norAC:andAC -> simplified: (B xor C) and (A xor B)
-24 andxorBCxorAB
-### 25 B?norAC:xnorAC -> simplified
-25 A?and!BC:!C
+23 C?!B:norBA
+24 B?norAC:andAC
+25 B?norAC:xnorAC
 26 B?norAC:C
 27 C?!B:!A
 28 andCxorBA
@@ -109,17 +97,12 @@
 2a andCnandBA
 2b C?nandBA:norBA
 2c B?!A:andAC
-### 2d B?!A:xnorAC -> simplified: (B or !C) xor A
-2d xorAorB!C
-### 2e B?!A:C -> simplified: (B or C) xor (A and B)
-2e xororBCandAB
-### 2f C?nandBA:!A -> simplified
-2f or!Aand!BC
+2d B?!A:xnorAC
+2e B?!A:C
+2f C?nandBA:!A
 30 andA!B
-### 31 A?!B:norBC -> simplified
-31 ornorBCandA!B
-### 32 norBnorAC -> simplified: !B and (A or (!A and C))
-32 and!BorAand!AC
+31 A?!B:norBC
+32 norBnorAC
 33 !B
 34 B?norAC:A
 35 A?!B:!C
@@ -128,66 +111,51 @@
 38 A?!B:andBC
 39 A?!B:xnorBC
 3a A?!B:C
-### 3b C?nandBA:!B -> simplified: !B or (!A and B and C)
-3b or!Band!AandBC
+3b C?nandBA:!B
 3c xorBA
-### 3d C?xorBA:nandBA -> simplified
-### 3d A?!B:orB!C -> simplified furher: (A xor B) or (A nor C)
-3d orxorABnorAC
+3d C?xorBA:nandBA
 3e A?!B:orBC
 3f nandBA
-### 40 norCnandBA -> simplified
-40 and!CandBA
+40 norCnandBA
 41 norCxorBA
-### 42 C?norBA:andBA -> simplified: (B xor C) and !(A xor B)
-42 andxorBCxnorAB
-### 43 C?norBA:xnorBA -> simplified
-43 A?andB!C:!B
+42 C?norBA:andBA
+43 C?norBA:xnorBA
 44 andB!C
-### 45 B?!C:norAC -> simplified: !C and (!A or (A and B))
-45 and!Cor!AandAB
+45 B?!C:norAC
 46 C?norBA:B
 47 B?!C:!A
 48 andBxorAC
 49 B?xorAC:norAC
 4a C?!A:andBA
-### 4b B?xorAC:!A -> simplified
-4b xorAor!BC
+4b B?xorAC:!A
 4c andBnandAC
 4d B?nandAC:norAC
 4e C?!A:B
-### 4f B?nandAC:!A -> simplified
-4f or!AandB!C
+4f B?nandAC:!A
 50 andA!C
-### 51 A?!C:norBC -> simplified: (B nor C) or (A and !C)
-51 ornorBCandA!C
+51 A?!C:norBC
 52 C?norBA:A
 53 A?!C:!B
-### 54 norCnorBA -> simplified: !C and (A or B)
-54 and!CorAB
+54 norCnorBA
 55 !C
 56 xorCorBA
 57 nandCorBA
 58 A?!C:andBC
 59 A?!C:xnorBC
 5a xorCA
-### 5b B?xorAC:nandAC -> simplified
-5b A?!C:or!BC
+5b B?xorAC:nandAC
 5c A?!C:B
-### 5d B?nandAC:!C -> simplified: !C or (!A and B)
-5d or!Cand!AB
+5d B?nandAC:!C
 5e A?!C:orBC
 5f nandCA
 60 andAxorBC
 61 A?xorBC:norBC
 62 C?!B:andBA
 63 A?xorBC:!B
-### 64 B?!C:andAC -> simplified: (B xor C) and (A or B)
-64 andxorBCorAB
+64 B?!C:andAC
 65 A?xorBC:!C
 66 xorCB
-### 67 A?xorBC:nandBC -> simplified
-67 orxorBCnorAB
+67 A?xorBC:nandBC
 68 A?xorBC:andBC
 ### 69 xnorABC ERROR?
 69 xnorAxorBC
@@ -198,26 +166,20 @@
 6e B?nandAC:C
 6f nandAxnorBC
 70 andAnandBC
-### 71 A?nandBC:norBC -> simplified: (B nor C) or (A and (B xor C))
-71 ornorBCandAxorBC
+71 A?nandBC:norBC
 72 C?!B:A
-### 73 A?nandBC:!B -> simplified: !B or (A and !C)
-73 or!BandA!C
+73 A?nandBC:!B
 74 B?!C:A
-### 75 A?nandBC:!C -> simplified: !C or (A and !B)
-75 or!CandA!B
+75 A?nandBC:!C
 76 B?!C:orAC
 77 nandCB
 78 xorAandBC
 79 A?nandBC:xnorBC
 7a A?nandBC:C
-### 7b nandBxnorAC -> simplified: !B or (A xor C)
-7b or!BxorAC
-### 7c A?nandBC:B -> simplified: (B xor A) or (A and !C)
-7c orxorABandA!C
+7b nandBxnorAC
+7c A?nandBC:B
 7d nandCxnorBA
-### 7e A?nandBC:orBC -> simplified (A xor (B and C)) or (!A and (B or C))
-7e orxorAandBCand!AorBC
+7e A?nandBC:orBC
 ### 7f nandABC -> conversion from 3-arg form into 2-arg form
 7f nandAnandBC
 ### 80 andABC -> conversion from 3-arg form into 2-arg form
@@ -231,16 +193,12 @@
 87 xnorAandBC
 88 andCB
 89 B?C:norAC
-### 8a A?andBC:C -> simplified: (B and C) or (!A and C)
-8a orandBCand!AC
+8a A?andBC:C
 8b B?C:!A
-### 8c A?andBC:B -> simplified: (B and C) or (!A and B)
-8c orandBCand!AB
+8c A?andBC:B
 8d C?B:!A
-### 8e A?andBC:orBC -> simplified: (B and C) or (!A and (B xor C))
-8e orandBCand!AxorBC
-### 8f nandAnandBC -> simplified: (B and C) or !A
-8f or!AandBC
+8e A?andBC:orBC
+8f nandAnandBC
 90 andAxnorBC
 91 B?andAC:!C
 92 B?andAC:xorAC
@@ -250,8 +208,7 @@
 ### 96 orABC ERROR: xorABC
 96 xorAxorBC
 97 A?xnorBC:nandBC
-### 98 A?xnorBC:andBC -> simplified: (B and C) or (A and (B nor C))
-98 orandBCandAnorBC
+98 A?xnorBC:andBC
 99 xnorCB
 9a A?xnorBC:C
 9b B?C:nandAC
@@ -261,8 +218,7 @@
 9f nandAxorBC
 a0 andCA
 a1 A?C:norBC
-### a2 B?andAC:C -> simplified: C and (A or !B)
-a2 andCorA!B
+a2 B?andAC:C
 a3 A?C:!B
 a4 B?xnorAC:andAC
 a5 xnorCA
@@ -279,28 +235,22 @@ af orC!A
 b0 B?andAC:A
 b1 C?A:!B
 b2 B?andAC:orAC
-### b3 nandBnandAC -> simplified
-b3 or!BandAC
-### b4 B?xnorAC:A -> simplified
-b4 xorAandB!C
+b3 nandBnandAC
+b4 B?xnorAC:A
 b5 C?A:nandBA
 b6 B?xnorAC:orAC
 b7 nandBxorAC
 b8 B?C:A
-### b9 C?orBA:!B -> simplified: (B xor C) or (A nad !B)
-b9 orxnorBCandA!B
-### ba B?C:orAC -> simplified
-ba orCandA!B
+b9 C?orBA:!B
+ba B?C:orAC
 bb orC!B
-### bc C?orBA:xorBA -> simplified
-bc A?nandB!C:B
+bc C?orBA:xorBA
 bd C?orBA:nandBA
 be orCxorBA
 bf orCnandBA
 c0 andBA
 c1 A?B:norBC
-### c2 C?xnorBA:andBA -> simplified
-c2 A?B:and!BC
+c2 C?xnorBA:andBA
 c3 xnorBA
 c4 C?andBA:B
 c5 A?B:!C
@@ -312,29 +262,21 @@ ca A?B:C
 cb B?orAC:!A
 cc B
 cd orBnorAC
-### ce A?B:orBC -> simplified: B or !(A and C)
-ce orBnandAC
+ce A?B:orBC
 cf orB!A
-### d0 C?andBA:A -> simplified
-d0 andAorB!C
-### d1 B?A:!C -> no condition
-d1 ornorBCandAB
-### d2 B?A:xorAC -> simplified: A xor (!B and C)
-d2 xorAand!BC
+d0 C?andBA:A
+d1 B?A:!C
+d2 B?A:xorAC
 d3 B?A:nandAC
-### d4 C?andBA:orBA -> simplified: (B and !C) or (A and (B xor C))
-d4 orandB!CandAxnorBC
-### d5 nandCnandBA -> simplified
-d5 or!CandAB
+d4 C?andBA:orBA
+d5 nandCnandBA
 d6 C?xnorBA:orBA
 d7 nandCxorBA
 d8 C?B:A
-### d9 B?orAC:!C -> simplified: !(B xor C) or (A and B)
-d9 orxnorBCandAB
+d9 B?orAC:!C
 da B?orAC:xorAC
 db B?orAC:nandAC
-### dc C?B:orBA -> simplified: B or (A and !C)
-dc orBandA!C
+dc C?B:orBA
 dd orB!C
 de orBxorAC
 df orBnandAC
@@ -344,40 +286,31 @@ e2 B?A:C
 e3 A?orBC:!B
 e4 C?A:B
 e5 A?orBC:!C
-### e6 A?orBC:xorBC -> simplified: (B xor C) or (A and B)
-e6 orxorBCandAB
-### e7 A?orBC:nandBC -> simplified: (B xor C) or (!A xor C)
-e7 orxorBCxor!AC
+e6 A?orBC:xorBC
+e7 A?orBC:nandBC
 ### e8 majorABC -> rewritten
-### e8 A?orBC:andBC -> simplified: (B and C) or (A and (B xor C))
-e8 orandBCandAxorBC
-### e9 A?orBC:xnorBC -> simplified: ((B xor C) xor !A) or (A and B)
-e9 orxor!AxorBCandAB
+e8 A?orBC:andBC
+e9 A?orBC:xnorBC
 ea orCandBA
 eb orCxnorBA
 ec orBandAC
 ed orBxnorAC
 ee orCB
-### ef nandAnorBC -> simplified
-ef or!AorBC
+ef nandAnorBC
 f0 A
 f1 orAnorBC
-### f2 B?A:orAC -> simplified
-f2 orAand!BC
+f2 B?A:orAC
 f3 orA!B
-### f4 C?A:orBA -> simplified
-f4 orAandB!C
+f4 C?A:orBA
 f5 orA!C
 f6 orAxorBC
 f7 orAnandBC
 f8 orAandBC
 f9 orAxnorBC
 fa orCA
-### fb nandBnorAC -> simplified
-fb orAor!BC
+fb nandBnorAC
 fc orBA
-### fd nandCnorBA -> simplified
-fd or!CorAB
+fd nandCnorBA
 ### fe orABC
 fe orAorBC
 ff TRUE

@@ -163,7 +163,7 @@ class CodeGenerator:
 
 
     def load(self):
-        with get_file('intel.txt', 'rt') as f:
+        with get_file('data/intel.txt', 'rt') as f:
             self.data = load(f)
 
             assert(len(self.data) == 256)
