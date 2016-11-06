@@ -23,3 +23,6 @@ class Lexer:
 
     def eof(self):
         return self.index == len(self.string)
+    
+    def __repr__(self):
+        return '<Lexer str="%s">' % self.string

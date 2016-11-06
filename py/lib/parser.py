@@ -21,6 +21,14 @@ def expression(lexer):
             assert(lexer.eof)
             return v
 
+    elif c == '1':
+        lexer.consume()
+        return Constant(True)
+
+    elif c == '0':
+        lexer.consume()
+        return Constant(False)
+
     elif c == '!':
         lexer.consume()
         return Negation(expression(lexer))
@@ -36,6 +44,15 @@ def expression(lexer):
 
                 return ret
 
+        if lexer.startswith('notand'):
+            lexer.skip(len('notand'))
+            a = Negation(expression(lexer))
+            b = expression(lexer)
+            ret = Binary('and', a, b)
+            
+            return ret
+
+        print `lexer`
         assert False, "unknown function"
 
 

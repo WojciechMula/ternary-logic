@@ -1,0 +1,244 @@
+# functions found by find.py utility
+
+# (A notand (B xor C))
+06 notandAxorBC
+# ((A notand B) and C)
+08 andnotandABC
+# (A notand ((B xor 1) or C))
+0b notandAorxorB1C
+# (A notand (B or (C xor 1)))
+0d notandAorBxorC1
+# (A notand (B or C))
+0e notandAorBC
+# (B notand (A xor C))
+12 notandBxorAC
+# (C notand (A xor B))
+14 notandCxorAB
+# ((A xor B) and (A xor C))
+18 andxorABxorAC
+# ((A and B) notand (B xor (C xor 1)))
+19 notandandABxorBxorC1
+# ((A and B) notand (A xor C))
+1a notandandABxorAC
+# ((A and C) notand (A xor B))
+1c notandandACxorAB
+# ((B notand A) and C)
+20 andnotandBAC
+# (B notand ((A xor 1) or C))
+23 notandBorxorA1C
+# ((A xor B) and (B xor C))
+24 andxorABxorBC
+# ((A and B) notand (A xor (C xor 1)))
+25 notandandABxorAxorC1
+# ((A and B) notand (B xor C))
+26 notandandABxorBC
+# ((B or C) and (A xor B))
+2c andorBCxorAB
+# (A xor (B or (C xor 1)))
+2d xorAorBxorC1
+# ((B notand C) or (A xor 1))
+2f ornotandBCxorA1
+# (B notand (A or (C xor 1)))
+31 notandBorAxorC1
+# (B notand (A or C))
+32 notandBorAC
+# ((B and C) notand (A xor B))
+34 notandandBCxorAB
+# ((A or C) and (A xor B))
+38 andorACxorAB
+# (B xor (A or (C xor 1)))
+39 xorBorAxorC1
+# ((A notand C) or (B xor 1))
+3b ornotandACxorB1
+# ((A xor B) or ((A or C) xor 1))
+3d orxorABxororAC1
+# ((A notand C) or (A xor B))
+3e ornotandACxorAB
+# ((C notand A) and B)
+40 andnotandCAB
+# ((A xor C) and (B xor C))
+42 andxorACxorBC
+# ((A and C) notand (A xor (B xor 1)))
+43 notandandACxorAxorB1
+# (C notand ((A xor 1) or B))
+45 notandCorxorA1B
+# ((A and C) notand (B xor C))
+46 notandandACxorBC
+# ((B or C) and (A xor C))
+4a andorBCxorAC
+# (A xor ((B xor 1) or C))
+4b xorAorxorB1C
+# ((C notand B) or (A xor 1))
+4f ornotandCBxorA1
+# (C notand (A or (B xor 1)))
+51 notandCorAxorB1
+# ((B and C) notand (A xor C))
+52 notandandBCxorAC
+# (C notand (A or B))
+54 notandCorAB
+# ((A or B) and (A xor C))
+58 andorABxorAC
+# (C xor (A or (B xor 1)))
+59 xorCorAxorB1
+# ((A xor C) or ((A or B) xor 1))
+5b orxorACxororAB1
+# ((A notand B) or (C xor 1))
+5d ornotandABxorC1
+# ((C notand B) or (A xor C))
+5e ornotandCBxorAC
+# ((A or C) and (B xor C))
+62 andorACxorBC
+# (B xor ((A xor 1) or C))
+63 xorBorxorA1C
+# ((A or B) and (B xor C))
+64 andorABxorBC
+# (C xor ((A xor 1) or B))
+65 xorCorxorA1B
+# ((B xor C) or ((A or B) xor 1))
+67 orxorBCxororAB1
+# ((A notand C) or ((A xor 1) xor (B xor C)))
+6b ornotandACxorxorA1xorBC
+# ((A notand B) or ((A xor 1) xor (B xor C)))
+6d ornotandABxorxorA1xorBC
+# ((A notand B) or (B xor C))
+6e ornotandABxorBC
+# ((B xor C) or (A xor 1))
+6f orxorBCxorA1
+# ((C notand A) or (B xor 1))
+73 ornotandCAxorB1
+# ((B notand A) or (C xor 1))
+75 ornotandBAxorC1
+# ((B notand A) or (B xor C))
+76 ornotandBAxorBC
+# ((B notand A) or ((B xor 1) xor (A xor C)))
+79 ornotandBAxorxorB1xorAC
+# ((B notand A) or (A xor C))
+7a ornotandBAxorAC
+# ((A xor C) or (B xor 1))
+7b orxorACxorB1
+# ((C notand A) or (A xor B))
+7c ornotandCAxorAB
+# ((A xor B) or (C xor 1))
+7d orxorABxorC1
+# ((A xor B) or (A xor C))
+7e orxorABxorAC
+# (((A and B) and C) xor 1)
+7f xorandandABC1
+# ((A xor C) notand (A xor (B xor 1)))
+81 notandxorACxorAxorB1
+# ((A xor B) notand ((A xor 1) or C))
+83 notandxorABorxorA1C
+# ((A xor C) notand (B or (C xor 1)))
+85 notandxorACorBxorC1
+# ((B or C) and (C xor (A xor B)))
+86 andorBCxorCxorAB
+# ((B xor C) notand ((A xor 1) or B))
+89 notandxorBCorxorA1B
+# ((B notand A) notand C)
+8a notandnotandBAC
+# ((C notand A) notand B)
+8c notandnotandCAB
+# ((B and C) or (A xor 1))
+8f orandBCxorA1
+# ((B xor C) notand (A or (B xor 1)))
+91 notandxorBCorAxorB1
+# ((A or C) and (C xor (A xor B)))
+92 andorACxorCxorAB
+# ((A or B) and (B xor (A xor C)))
+94 andorABxorBxorAC
+# ((B xor C) notand (A or B))
+98 notandxorBCorAB
+# ((B notand A) xor C)
+9a xornotandBAC
+# ((A notand C) or (B xor (C xor 1)))
+9b ornotandACxorBxorC1
+# ((C notand A) xor B)
+9c xornotandCAB
+# ((A notand B) or (B xor (C xor 1)))
+9d ornotandABxorBxorC1
+# ((B and C) or (C xor (A xor B)))
+9e orandBCxorCxorAB
+# ((A xor C) notand (A or (B xor 1)))
+a1 notandxorACorAxorB1
+# ((A notand B) notand C)
+a2 notandnotandABC
+# ((A xor C) notand (A or B))
+a4 notandxorACorAB
+# ((A notand B) xor C)
+a6 xornotandABC
+# ((B notand C) or (A xor (C xor 1)))
+a7 ornotandBCxorAxorC1
+# ((B and C) or (A xor (C xor 1)))
+ad orandBCxorAxorC1
+# ((A notand B) or C)
+ae ornotandABC
+# ((C notand B) notand A)
+b0 notandnotandCBA
+# ((A and C) or (B xor 1))
+b3 orandACxorB1
+# ((C notand B) xor A)
+b4 xornotandCBA
+# ((B notand A) or (A xor (C xor 1)))
+b5 ornotandBAxorAxorC1
+# ((A and C) or (C xor (A xor B)))
+b6 orandACxorCxorAB
+# ((A and C) or (B xor (C xor 1)))
+b9 orandACxorBxorC1
+# ((B notand A) or C)
+ba ornotandBAC
+# ((A and C) or (A xor B))
+bc orandACxorAB
+# ((A xor B) or (A xor (C xor 1)))
+bd orxorABxorAxorC1
+# ((A xor B) notand (A or (C xor 1)))
+c1 notandxorABorAxorC1
+# ((A xor B) notand (A or C))
+c2 notandxorABorAC
+# ((A notand C) notand B)
+c4 notandnotandACB
+# ((A notand C) xor B)
+c6 xornotandACB
+# ((C notand B) or (A xor (B xor 1)))
+c7 ornotandCBxorAxorB1
+# ((B and C) or (A xor (B xor 1)))
+cb orandBCxorAxorB1
+# ((A notand C) or B)
+ce ornotandACB
+# ((B notand C) notand A)
+d0 notandnotandBCA
+# ((B notand C) xor A)
+d2 xornotandBCA
+# ((C notand A) or (A xor (B xor 1)))
+d3 ornotandCAxorAxorB1
+# ((A and B) or (C xor 1))
+d5 orandABxorC1
+# ((A and B) or (B xor (A xor C)))
+d6 orandABxorBxorAC
+# ((A and B) or (B xor (C xor 1)))
+d9 orandABxorBxorC1
+# ((A and B) or (A xor C))
+da orandABxorAC
+# ((A xor C) or (A xor (B xor 1)))
+db orxorACxorAxorB1
+# ((C notand A) or B)
+dc ornotandCAB
+# ((A and C) or (A xor (B xor 1)))
+e3 orandACxorAxorB1
+# ((A and B) or (A xor (C xor 1)))
+e5 orandABxorAxorC1
+# ((A and B) or (B xor C))
+e6 orandABxorBC
+# ((B xor C) or (A xor (B xor 1)))
+e7 orxorBCxorAxorB1
+# ((A and B) or (B xor (A xor (C xor 1))))
+e9 orandABxorBxorAxorC1
+# (B or ((A xor 1) or C))
+ef orBorxorA1C
+# ((B notand C) or A)
+f2 ornotandBCA
+# ((C notand B) or A)
+f4 ornotandCBA
+# (A or ((B xor 1) or C))
+fb orAorxorB1C
+# (A or (B or (C xor 1)))
+fd orAorBxorC1

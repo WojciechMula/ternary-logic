@@ -172,6 +172,9 @@ class CodeGenerator:
         with get_file('data/manually_optimized.txt', 'rt') as f:
             self.data['optimized'] = load(f)
 
+        with get_file('data/sse_and_avx2.txt', 'rt') as f:
+            self.data['automat'] = load(f)
+
 
     def generate_single(self, code, expr, source):
 
