@@ -17,6 +17,16 @@ def arguments():
     yield (Variable('B'), Constant(True))
     yield (Variable('C'), Constant(True))
 
+def variables():
+    yield Constant(False)
+    yield Constant(True)
+    yield Variable('A')
+    yield Variable('B')
+    yield Variable('C')
+    yield Negation(Variable('A'))
+    yield Negation(Variable('B'))
+    yield Negation(Variable('C'))
+
 def ops():
     yield 'and'
     yield 'or'
@@ -78,6 +88,22 @@ def functions_1level():
     for op in ops():
         for arg0, arg1 in arguments():
             yield Binary(op, arg0, arg1)
+
+
+def conditions():
+    processed = set()
+    functions = []
+    for fun in chain(variables(), functions_1level(), functions_2levels()):
+        expr  = simplify(fun)
+        index = expr.bin()
+        if index not in processed:
+            processed.add(index)
+            functions.append(expr)
+
+    for var in [Variable('A'), Variable('B'), Variable('C')]:
+        for t in functions:
+            for f in functions:
+                yield Condition(var, t, f)
 
 
 from lib.bodygen import BodyGenerator
@@ -177,7 +203,7 @@ class Application:
 
     def load(self):
         self.data = {}
-        paths = ('data/intel.txt', 'data/manually_optimized.txt')
+        paths = ('data/intel.txt', 'data/manually_optimized.txt', 'data/sse_and_avx2.txt')
         for path in paths:
             self.pick_best(path)
 
@@ -221,8 +247,13 @@ class Application:
 
 
 def main():
-    options     = parse_args(sys.argv)
-    functions   = chain(functions_1level(), functions_2levels(), functions_3levels())
+    options = parse_args(sys.argv)
+    
+    if options.target == Target_XOP:
+        functions = conditions()
+    else:
+        functions = chain(functions_1level(), functions_2levels(), functions_3levels())
+
     app = Application(options, functions)
     app.run()
 
