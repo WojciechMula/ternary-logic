@@ -71,8 +71,11 @@ Reference, A-Z".
 __ http://www.intel.com/content/www/us/en/processors/architectures-software-developer-manuals.html
 
 I extracted these functions and created application which generates SSE
-and AVX2 code. List of function is in the file ``py/intel.txt``, I also
-put there more details.
+and AVX2 code. List of function is in the file ``py/data/intel.txt``,
+I also put there more details. Later I manually optimized some of these
+function. And in the end I developed a program which found many better
+representations of functions for both Intel and AMD flavours of SIMD
+ISA.
 
 
 Usage
@@ -92,9 +95,6 @@ What's missing?
 -----------------------------------------------------------
 
 * Support for C language.
-* (I strongly believe that Intel published the best functions,
-  but maybe some of them could be simplified?) Well, so far
-  I mananged to simplify 66 of them.
 * Maybe C++ code should be written in another way? ("And we all
   know that **someone else's** C++ code is a complete mess almost
   by definition.")
