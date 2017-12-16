@@ -23,5 +23,8 @@ ternary_avx2.cpp: $(PYDEPS) py/cpp.function py/cpp.avx2.main $(DATA)
 ternary_xop.cpp: $(PYDEPS) py/cpp.function py/cpp.xop.main $(DATA)
 	python py/main.py --language=cpp --target=xop -o $@
 
+test: validate_sse
+	./validate_sse
+
 clean:
 	rm -f $(ALL)
