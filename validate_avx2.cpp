@@ -10,7 +10,7 @@ void validate() {
     const __m256i B = _mm256_set1_epi16(0xcc); // 0b1100_1100
     const __m256i C = _mm256_set1_epi16(0xaa); // 0b1010_1010
 
-    const __m256i R = ternarylogic::avx2::ternary<K>(C, B, A);
+    const __m256i R = ternarylogic::avx2::ternary<K>(A, B, C);
 
     const uint8_t expected = K;
     const uint8_t result   = _mm256_extract_epi32(R, 0);

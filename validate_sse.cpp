@@ -10,7 +10,7 @@ void validate() {
     const __m128i B = _mm_set1_epi16(0xcc); // 0b1100_1100
     const __m128i C = _mm_set1_epi16(0xaa); // 0b1010_1010
 
-    const __m128i R = ternarylogic::sse::ternary<K>(C, B, A);
+    const __m128i R = ternarylogic::sse::ternary<K>(A, B, C);
 
     const uint8_t expected = K;
     const uint8_t result   = _mm_extract_epi16(R, 0);

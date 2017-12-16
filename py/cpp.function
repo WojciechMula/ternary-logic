@@ -1,4 +1,4 @@
 // %(COMMENT)s
-template<> %(TYPE)s %(NAME)s<0x%(CODE)02x>(const %(TYPE)s C, const %(TYPE)s B, const %(TYPE)s A) {
+template<> %(TYPE)s %(NAME)s<0x%(CODE)02x>(const %(TYPE)s A, const %(TYPE)s B, const %(TYPE)s C) {
     %(BODY)s
 }
