@@ -1,7 +1,7 @@
 FLAGS=-std=c++11 -O2 -Wall -pedantic
 PYDEPS=py/*.py py/lib/*.py
 DATA=py/data/*.txt
-ALL=validate_sse validate_avx2 validate_xop
+ALL=validate_sse validate_avx2 validate_xop validate_x86
 
 all: $(ALL)
 
@@ -14,6 +14,9 @@ validate_avx2: validate_avx2.cpp ternary_avx2.cpp
 validate_xop: validate_xop.cpp ternary_xop.cpp
 	$(CXX) $(FLAGS) -mxop validate_xop.cpp -o $@
 
+validate_x86: validate_x86.cpp ternary_x86_64.cpp ternary_x86_32.cpp
+	$(CXX) $(FLAGS) validate_x86.cpp -o $@
+
 ternary_sse.cpp: $(PYDEPS) py/cpp.function py/cpp.sse.main $(DATA)
 	python py/main.py --language=cpp --target=sse -o $@
 
@@ -23,8 +26,15 @@ ternary_avx2.cpp: $(PYDEPS) py/cpp.function py/cpp.avx2.main $(DATA)
 ternary_xop.cpp: $(PYDEPS) py/cpp.function py/cpp.xop.main $(DATA)
 	python py/main.py --language=cpp --target=xop -o $@
 
-test: validate_sse
+ternary_x86_64.cpp: $(PYDEPS) py/cpp.function py/cpp.x86_64.main $(DATA)
+	python py/main.py --language=cpp --target=x86_64 -o $@
+
+ternary_x86_32.cpp: $(PYDEPS) py/cpp.function py/cpp.x86_32.main $(DATA)
+	python py/main.py --language=cpp --target=x86_32 -o $@
+
+test: validate_sse validate_x86
 	./validate_sse
+	./validate_x86
 
 clean:
 	rm -f $(ALL)

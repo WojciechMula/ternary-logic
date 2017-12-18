@@ -9,7 +9,7 @@ namespace ternarylogic {
         template<unsigned k> %(TYPE)s ternary(const %(TYPE)s, const %(TYPE)s, const %(TYPE)s) {
             static_assert(k < 256, "Unspecified ternary function");
             return _mm_setzero_si128();
-        } 
+        }
 
         %(FUNCTIONS)s
 

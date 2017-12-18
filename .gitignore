@@ -1,3 +1,4 @@
 validate_sse
 validate_avx2
 validate_xop
+validate_x86

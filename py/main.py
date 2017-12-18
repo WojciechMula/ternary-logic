@@ -10,6 +10,8 @@ Language_C      = 2
 Target_SSE      = 10
 Target_AVX2     = 20
 Target_XOP      = 30
+Target_X86_64   = 40
+Target_X86_32   = 50
 
 
 def main():
@@ -28,7 +30,7 @@ def parse_args(args):
 
     parser.add_option(
         "--target",
-        help="choose target (SSE, AVX2, XOP)"
+        help="choose target (SSE, AVX2, XOP, X86_64, X86_32)"
     )
 
     parser.add_option(
@@ -68,8 +70,12 @@ def parse_args(args):
         options.target = Target_AVX2
     elif options.target.lower() == 'xop':
         options.target = Target_XOP
+    elif options.target.lower() == 'x86_64':
+        options.target = Target_X86_64
+    elif options.target.lower() == 'x86_32':
+        options.target = Target_X86_32
     else:
-        valid = ('sse', 'avx2', 'xop')
+        valid = ('sse', 'avx2', 'xop', 'x86_64', 'x86_32')
         parser.error("--target expects: %s" % ', '.join(valid))
 
     return options
@@ -109,9 +115,11 @@ class CodeGenerator:
     def setup(self):
         import lib.lowering_sse
         import lib.lowering_xop
+        import lib.lowering_x86
         import lib.assembler_sse
         import lib.assembler_avx2
         import lib.assembler_xop
+        import lib.assembler_x86
 
         if self.options.target == Target_SSE:
             self.lowering  = lib.lowering_sse.transform
@@ -124,6 +132,14 @@ class CodeGenerator:
         elif self.options.target == Target_XOP:
             self.lowering = lib.lowering_xop.transform
             self.assembler_class = lib.assembler_xop.AssemblerXOP
+
+        elif self.options.target == Target_X86_64:
+            self.lowering = lib.lowering_x86.transform
+            self.assembler_class = lib.assembler_x86.AssemblerX86_64
+
+        elif self.options.target == Target_X86_32:
+            self.lowering = lib.lowering_x86.transform
+            self.assembler_class = lib.assembler_x86.AssemblerX86_32
 
         with get_file(self.get_function_file()) as f:
             self.function_pattern = f.read()
@@ -143,6 +159,10 @@ class CodeGenerator:
                 return 'cpp.avx2.main'
             elif self.options.target == Target_XOP:
                 return 'cpp.xop.main'
+            elif self.options.target == Target_X86_64:
+                return 'cpp.x86_64.main'
+            elif self.options.target == Target_X86_32:
+                return 'cpp.x86_32.main'
             else:
                 assert False
 

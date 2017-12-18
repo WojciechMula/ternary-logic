@@ -33,5 +33,5 @@ class Assembler:
     def add_negation(self, var):
         raise ValueError("unsupported")
 
-    def add_condition(self, var):
+    def add_condition(self, cond, var1, var2):
         raise ValueError("unsupported")

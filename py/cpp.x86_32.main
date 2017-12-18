@@ -1,19 +1,19 @@
 // Generated automatically, please do not edit
 #pragma once
-#include <immintrin.h>
+#include <cstdint>
 
 namespace ternarylogic {
 
-    namespace avx2 {
+    namespace x86_32 {
 
         template<unsigned k> %(TYPE)s ternary(const %(TYPE)s, const %(TYPE)s, const %(TYPE)s) {
             static_assert(k < 256, "Unspecified ternary function");
-            return _mm256_setzero_si256();
+            return 0;
         }
 
         %(FUNCTIONS)s
 
-    } // namespace avx2
+    } // namespace sse
 
 } // namespace ternarylogic
 
