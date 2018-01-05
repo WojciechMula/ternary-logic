@@ -9,7 +9,7 @@ namespace ternarylogic {
         template<unsigned k> uint64_t ternary(const uint64_t, const uint64_t, const uint64_t) {
             static_assert(k < 256, "Unspecified ternary function");
             return 0;
-        } 
+        }
 
         // code=0x00, function=0, lowered=0, set=intel
         template<> uint64_t ternary<0x00>(const uint64_t A, const uint64_t B, const uint64_t C) {

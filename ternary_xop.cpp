@@ -9,7 +9,7 @@ namespace ternarylogic {
         template<unsigned k> __m128i ternary(const __m128i, const __m128i, const __m128i) {
             static_assert(k < 256, "Unspecified ternary function");
             return _mm_setzero_si128();
-        } 
+        }
 
         // code=0x00, function=0, lowered=0, set=intel
         template<> __m128i ternary<0x00>(const __m128i A, const __m128i B, const __m128i C) {

@@ -12,6 +12,7 @@ Target_AVX2     = 20
 Target_XOP      = 30
 Target_X86_64   = 40
 Target_X86_32   = 50
+Target_AVX512   = 60
 
 
 def main():
@@ -68,6 +69,8 @@ def parse_args(args):
         options.target = Target_SSE
     elif options.target.lower() == 'avx2':
         options.target = Target_AVX2
+    elif options.target.lower() == 'avx512':
+        options.target = Target_AVX512
     elif options.target.lower() == 'xop':
         options.target = Target_XOP
     elif options.target.lower() == 'x86_64':
@@ -75,7 +78,7 @@ def parse_args(args):
     elif options.target.lower() == 'x86_32':
         options.target = Target_X86_32
     else:
-        valid = ('sse', 'avx2', 'xop', 'x86_64', 'x86_32')
+        valid = ('sse', 'avx2', 'xop', 'x86_64', 'x86_32', 'avx512')
         parser.error("--target expects: %s" % ', '.join(valid))
 
     return options
@@ -118,6 +121,7 @@ class CodeGenerator:
         import lib.lowering_x86
         import lib.assembler_sse
         import lib.assembler_avx2
+        import lib.assembler_avx512
         import lib.assembler_xop
         import lib.assembler_x86
 
@@ -128,6 +132,10 @@ class CodeGenerator:
         elif self.options.target == Target_AVX2:
             self.lowering = lib.lowering_sse.transform
             self.assembler_class = lib.assembler_avx2.AssemblerAVX2
+
+        elif self.options.target == Target_AVX512:
+            self.lowering = lib.lowering_sse.transform
+            self.assembler_class = lib.assembler_avx512.AssemblerAVX512
 
         elif self.options.target == Target_XOP:
             self.lowering = lib.lowering_xop.transform
@@ -157,6 +165,8 @@ class CodeGenerator:
                 return 'cpp.sse.main'
             elif self.options.target == Target_AVX2:
                 return 'cpp.avx2.main'
+            elif self.options.target == Target_AVX512:
+                return 'cpp.avx512.main'
             elif self.options.target == Target_XOP:
                 return 'cpp.xop.main'
             elif self.options.target == Target_X86_64:

@@ -1,0 +1,29 @@
+// Generated automatically, please do not edit
+#pragma once
+#include <immintrin.h>
+
+namespace ternarylogic {
+
+    namespace avx512raw {
+
+        template<unsigned k> %(TYPE)s ternary(const %(TYPE)s A, const %(TYPE)s B, const %(TYPE)s C) {
+            static_assert(k < 256, "Unspecified ternary function");
+            return _mm512_ternarylogic_epi32(A, B, C, k);
+        }
+
+    }
+
+    namespace avx512 {
+
+        template<unsigned k> %(TYPE)s ternary(const %(TYPE)s, const %(TYPE)s, const %(TYPE)s) {
+            static_assert(k < 256, "Unspecified ternary function");
+            return _mm512_setzero_si512();
+        }
+
+        %(FUNCTIONS)s
+
+    } // namespace avx512
+
+} // namespace ternarylogic
+
+// eof

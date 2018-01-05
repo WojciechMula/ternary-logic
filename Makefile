@@ -1,7 +1,7 @@
 FLAGS=-std=c++11 -O2 -Wall -pedantic
 PYDEPS=py/*.py py/lib/*.py
 DATA=py/data/*.txt
-ALL=validate_sse validate_avx2 validate_xop validate_x86
+ALL=validate_sse validate_avx2 validate_xop validate_x86 ternary_avx512.o
 
 all: $(ALL)
 
@@ -17,11 +17,17 @@ validate_xop: validate_xop.cpp ternary_xop.cpp
 validate_x86: validate_x86.cpp ternary_x86_64.cpp ternary_x86_32.cpp
 	$(CXX) $(FLAGS) validate_x86.cpp -o $@
 
+ternary_avx512.o: ternary_avx512.cpp
+	$(CXX) $(FLAGS) -mavx512f $^ -c -o $@
+
 ternary_sse.cpp: $(PYDEPS) py/cpp.function py/cpp.sse.main $(DATA)
 	python py/main.py --language=cpp --target=sse -o $@
 
 ternary_avx2.cpp: $(PYDEPS) py/cpp.function py/cpp.avx2.main $(DATA)
 	python py/main.py --language=cpp --target=avx2 -o $@
+
+ternary_avx512.cpp: $(PYDEPS) py/cpp.function py/cpp.avx512.main $(DATA)
+	python py/main.py --language=cpp --target=avx512 -o $@
 
 ternary_xop.cpp: $(PYDEPS) py/cpp.function py/cpp.xop.main $(DATA)
 	python py/main.py --language=cpp --target=xop -o $@

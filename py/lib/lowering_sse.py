@@ -1,4 +1,4 @@
-# Transformations apply to both SSE and AVX.
+# Transformations apply to all SSE, AVX and AVX512.
 
 from ast import *
 
