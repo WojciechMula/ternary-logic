@@ -91,17 +91,6 @@ Programs ``validate_sse``, ``validate_avx2`` and ``validate_xop``
 test if all generated functions are correct.
 
 
-What's missing?
------------------------------------------------------------
-
-* Support for C language.
-* Maybe C++ code should be written in another way? ("And we all
-  know that **someone else's** C++ code is a complete mess almost
-  by definition.")
-
-All PRs are warmly welcome!
-
-
 See also
 -----------------------------------------------------------
 
