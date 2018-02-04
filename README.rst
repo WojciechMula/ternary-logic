@@ -14,7 +14,7 @@ boolean function for each bit of operands.  The function is given as
 __ https://software.intel.com/sites/landingpage/IntrinsicsGuide/#
 
 This repository contains a kind of library which allows a programmer to
-use ternary functions in SSE, XOP__ and AVX2 in similar manner, by
+use ternary functions in SSE, XOP__, AVX2 and x86 in similar manner, by
 choosing the function by its number.
 
 __ https://en.wikipedia.org/wiki/XOP_instruction_set
