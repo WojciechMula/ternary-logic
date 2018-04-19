@@ -83,9 +83,16 @@ Usage
 
 You need ``python`` and ``make``.
 
-Type ``make``, then three files will be generated ``ternary_sse.cpp``,
-``ternary_avx2.cpp`` and ``ternary_xop.cpp``.  You can include them
-directly into your application.
+Type ``make``, then following files will be generated:
+
+* ``ternary_sse.cpp``,
+* ``ternary_avx2.cpp``,
+* ``ternary_avx512.cpp`` (use only two-argument logic instructions),
+* ``ternary_xop.cpp``,
+* ``ternary_x86_32.cpp``,
+* ``ternary_x86_64.cpp``.
+
+You can include them directly into your application.
 
 Programs ``validate_sse``, ``validate_avx2`` and ``validate_xop``
 test if all generated functions are correct.
