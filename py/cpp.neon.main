@@ -1,0 +1,20 @@
+// Generated automatically, please do not edit
+#pragma once
+#include <arm_neon.h>
+
+namespace ternarylogic {
+
+    namespace neon {
+
+        template<unsigned k> %(TYPE)s ternary(const %(TYPE)s, const %(TYPE)s, const %(TYPE)s) {
+            static_assert(k < 256, "Unspecified ternary function");
+            return vdupq_n_s32(0);
+        }
+
+        %(FUNCTIONS)s
+
+    } // namespace neon
+
+} // namespace ternarylogic
+
+// eof
