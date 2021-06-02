@@ -49,6 +49,8 @@ class BodyGenerator:
                 var, expr = self.assembler.add_xor(a, b)
             elif node.op == 'notand':
                 var, expr = self.assembler.add_notand(a, b)
+            elif node.op == 'notor':
+                var, expr = self.assembler.add_notor(a, b)
             else:
                 assert False, "unsupported op=%s" % node.op
 

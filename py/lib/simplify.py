@@ -18,12 +18,12 @@ def simplify(root):
     if isinstance(root, Binary):
         a = simplify(root.a)
         b = simplify(root.b)
-        if root.op in set(('or', 'and', 'xor', 'notand')):
+        if root.op in set(('or', 'and', 'xor', 'notand', 'notor')):
             if isinstance(a, Variable) and isinstance(b, Variable) and a.var == b.var:
                 
                 if root.op in ('or', 'and'):
                     return a # x or x = x, also x and x = x
-                elif root.op in ('xor', 'notand'):
+                elif root.op in ('xor', 'notand', 'notor'):
                     return Constant(False) # x xor x = 0
 
             if isinstance(a, Constant) and isinstance(b, Constant):

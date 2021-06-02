@@ -9,8 +9,16 @@ def transform_binary(root):
         a = transform_binary(root.a)
         b = transform_binary(root.b)
 
-        if root.op in ('or', 'xor', 'notand'):
+        if root.op in ('xor', 'notand', 'notor'):
             return Binary(root.op, a, b)
+        elif root.op == 'or':
+            # exploiting existence of the notor instruction
+            if isinstance(a, Negation):
+                return Binary('notor', a.value, b)
+            elif isinstance(b, Negation):
+                return Binary('notor', b.value, a)
+            else:
+                return Binary(root.op, a, b)
 
         # nor/nand/xnor are not supported
         elif root.op == 'nor':
@@ -45,37 +53,8 @@ def transform_binary(root):
     assert False, root
 
 
-def transform_negations(root):
-    # since SSE/AVX has no negation it must be expressed with x xor 1
-
-    def negate(node):
-        ones = Constant(True)
-        val  = transform_negations(node)
-        return Binary('xor', val, ones)
-
-    if isinstance(root, (Constant, Variable)):
-        return root
-
-    if isinstance(root, Binary):
-        root.a = transform_negations(root.a)
-        root.b = transform_negations(root.b)
-
-        return root
-
-    if isinstance(root, Condition):
-        root.var   = transform_negations(root.var)
-        root.true  = transform_negations(root.true)
-        root.false = transform_negations(root.false)
-
-        return root
-
-    if isinstance(root, Negation):
-        return negate(transform_negations(root.value))
-
-    assert False, root
-
-
 def transform(root):
-    root = transform_binary(root)
+    return transform_binary(root)
+    # root = transform_binary(root)
 
-    return transform_negations(root)
+    # return transform_negations(root)

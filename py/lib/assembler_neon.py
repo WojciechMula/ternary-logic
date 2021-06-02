@@ -31,6 +31,12 @@ class AssemblerNEON(Assembler):
 
         return (var, expr)
 
+    def add_notor(self, var1, var2):
+        var  = self.get_var()
+        expr = '%s %s = vornq_s32(%s, %s);' % (self.const_type, var, var2, var1)
+
+        return (var, expr)
+
     def add_xor(self, var1, var2):
         var  = self.get_var()
         expr = '%s %s = veorq_s32(%s, %s);' % (self.const_type, var, var1, var2)
@@ -46,6 +52,11 @@ class AssemblerNEON(Assembler):
     def add_condition(self, cond, var1, var2):
         var  = self.get_var()
         expr = '%s %s = vbslq_s32(vreinterpretq_u32_s32(%s), %s, %s);' % (self.const_type, var, cond, var1, var2)
-        # expr = '%s %s = (%s & %s) | (~%s & %s);' % (self.const_type, var, cond, var1, cond, var2)
+
+        return (var, expr)
+
+    def add_negation(self, var1):
+        var  = self.get_var()
+        expr = '%s %s = vmvnq_s32(%s);' % (self.const_type, var, var1)
 
         return (var, expr)

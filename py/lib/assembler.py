@@ -27,6 +27,9 @@ class Assembler:
     def add_notand(self, var1, var2):
         raise ValueError("unsupported")
 
+    def add_notor(self, var1, var2):
+        raise ValueError("unsupported")
+
     def add_not(self, var):
         raise ValueError("unsupported")
 

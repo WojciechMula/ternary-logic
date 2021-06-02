@@ -182,6 +182,7 @@ class CodeGenerator:
         paths = {
             'optimized': 'data/manually_optimized.txt',
             'automat'  : 'data/sse_and_avx2.txt',
+            'neon'     : 'data/neon.txt',
             'xop'      : 'data/xop.txt',
         }
 
