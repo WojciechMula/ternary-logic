@@ -10,6 +10,7 @@ Target_XOP      = 30
 Target_X86_64   = 40
 Target_X86_32   = 50
 Target_AVX512   = 60
+Target_NEON     = 70
 
 
 def main():
@@ -23,7 +24,7 @@ def parse_args(args):
     parser = OptionParser()
     parser.add_option(
         "--target",
-        help="choose target (SSE, AVX2, XOP, X86_64, X86_32)"
+        help="choose target (SSE, AVX2, XOP, X86_64, X86_32, NEON)"
     )
 
     parser.add_option(
@@ -57,8 +58,10 @@ def parse_args(args):
         options.target = Target_X86_64
     elif options.target.lower() == 'x86_32':
         options.target = Target_X86_32
+    elif options.target.lower() == 'neon':
+        options.target = Target_NEON
     else:
-        valid = ('sse', 'avx2', 'xop', 'x86_64', 'x86_32', 'avx512')
+        valid = ('sse', 'avx2', 'xop', 'x86_64', 'x86_32', 'avx512', 'neon')
         parser.error("--target expects: %s" % ', '.join(valid))
 
     return options
@@ -99,11 +102,13 @@ class CodeGenerator:
         import lib.lowering_sse
         import lib.lowering_xop
         import lib.lowering_x86
+        import lib.lowering_neon
         import lib.assembler_sse
         import lib.assembler_avx2
         import lib.assembler_avx512
         import lib.assembler_xop
         import lib.assembler_x86
+        import lib.assembler_neon
 
         if self.options.target == Target_SSE:
             self.lowering  = lib.lowering_sse.transform
@@ -129,6 +134,10 @@ class CodeGenerator:
             self.lowering = lib.lowering_x86.transform
             self.assembler_class = lib.assembler_x86.AssemblerX86_32
 
+        elif self.options.target == Target_NEON:
+            self.lowering = lib.lowering_neon.transform
+            self.assembler_class = lib.assembler_neon.AssemblerNEON
+
         with get_file(self.get_function_file()) as f:
             self.function_pattern = f.read()
 
@@ -152,6 +161,8 @@ class CodeGenerator:
             return 'cpp.x86_64.main'
         elif self.options.target == Target_X86_32:
             return 'cpp.x86_32.main'
+        elif self.options.target == Target_NEON:
+            return 'cpp.neon.main'
         else:
             assert False
 
@@ -171,6 +182,7 @@ class CodeGenerator:
         paths = {
             'optimized': 'data/manually_optimized.txt',
             'automat'  : 'data/sse_and_avx2.txt',
+            'neon'     : 'data/neon.txt',
             'xop'      : 'data/xop.txt',
         }
 

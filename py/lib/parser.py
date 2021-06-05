@@ -52,6 +52,14 @@ def expression(lexer):
             
             return ret
 
+        if lexer.startswith('notor'):
+            lexer.skip(len('notor'))
+            a = Negation(expression(lexer))
+            b = expression(lexer)
+            ret = Binary('or', a, b)
+
+            return ret
+
         print `lexer`
         assert False, "unknown function"
 

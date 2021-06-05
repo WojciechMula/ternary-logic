@@ -208,13 +208,13 @@ namespace ternarylogic {
             const __m512i t2 = _mm512_andnot_si512(t0, t1);
             return t2;
         }
-        // code=0x1b, function=(C ? not (A) : not (B)), lowered=((A notand C) or (C notand (B xor 1))), set=intel
+        // code=0x1b, function=((A and C) xor (not (B) or C)), lowered=((A and C) xor ((B xor 1) or C)), set=neon
         template<> __m512i ternary<0x1b>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_andnot_si512(A, C);
+            const __m512i t0 = _mm512_and_si512(A, C);
             const __m512i c1 = _mm512_set1_epi32(-1);
             const __m512i t1 = _mm512_xor_si512(B, c1);
-            const __m512i t2 = _mm512_andnot_si512(C, t1);
-            const __m512i t3 = _mm512_or_si512(t0, t2);
+            const __m512i t2 = _mm512_or_si512(t1, C);
+            const __m512i t3 = _mm512_xor_si512(t0, t2);
             return t3;
         }
         // code=0x1c, function=(not ((A and C)) and (A xor B)), lowered=((A and C) notand (A xor B)), set=automat
@@ -224,13 +224,13 @@ namespace ternarylogic {
             const __m512i t2 = _mm512_andnot_si512(t0, t1);
             return t2;
         }
-        // code=0x1d, function=(B ? not (A) : not (C)), lowered=((A notand B) or (B notand (C xor 1))), set=intel
+        // code=0x1d, function=((A and B) xor (not (C) or B)), lowered=((A and B) xor ((C xor 1) or B)), set=neon
         template<> __m512i ternary<0x1d>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_andnot_si512(A, B);
+            const __m512i t0 = _mm512_and_si512(A, B);
             const __m512i c1 = _mm512_set1_epi32(-1);
             const __m512i t1 = _mm512_xor_si512(C, c1);
-            const __m512i t2 = _mm512_andnot_si512(B, t1);
-            const __m512i t3 = _mm512_or_si512(t0, t2);
+            const __m512i t2 = _mm512_or_si512(t1, B);
+            const __m512i t3 = _mm512_xor_si512(t0, t2);
             return t3;
         }
         // code=0x1e, function=(A xor (B or C)), lowered=(A xor (B or C)), set=intel
@@ -297,13 +297,13 @@ namespace ternarylogic {
             const __m512i t2 = _mm512_andnot_si512(t0, t1);
             return t2;
         }
-        // code=0x27, function=(C ? not (B) : not (A)), lowered=((B notand C) or (C notand (A xor 1))), set=intel
+        // code=0x27, function=((B and C) xor (not (A) or C)), lowered=((B and C) xor ((A xor 1) or C)), set=neon
         template<> __m512i ternary<0x27>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_andnot_si512(B, C);
+            const __m512i t0 = _mm512_and_si512(B, C);
             const __m512i c1 = _mm512_set1_epi32(-1);
             const __m512i t1 = _mm512_xor_si512(A, c1);
-            const __m512i t2 = _mm512_andnot_si512(C, t1);
-            const __m512i t3 = _mm512_or_si512(t0, t2);
+            const __m512i t2 = _mm512_or_si512(t1, C);
+            const __m512i t3 = _mm512_xor_si512(t0, t2);
             return t3;
         }
         // code=0x28, function=(C and (B xor A)), lowered=(C and (B xor A)), set=intel
@@ -312,15 +312,15 @@ namespace ternarylogic {
             const __m512i t1 = _mm512_and_si512(C, t0);
             return t1;
         }
-        // code=0x29, function=(C ? (B xor A) : (B nor A)), lowered=((C and (B xor A)) or (C notand ((B or A) xor 1))), set=intel
+        // code=0x29, function=((not (A) or C) and (not (A) xor (B xor C))), lowered=(((A xor 1) or C) and ((A xor 1) xor (B xor C))), set=neon
         template<> __m512i ternary<0x29>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_xor_si512(B, A);
-            const __m512i t1 = _mm512_and_si512(C, t0);
-            const __m512i t2 = _mm512_or_si512(B, A);
             const __m512i c1 = _mm512_set1_epi32(-1);
-            const __m512i t3 = _mm512_xor_si512(t2, c1);
-            const __m512i t4 = _mm512_andnot_si512(C, t3);
-            const __m512i t5 = _mm512_or_si512(t1, t4);
+            const __m512i t0 = _mm512_xor_si512(A, c1);
+            const __m512i t1 = _mm512_or_si512(t0, C);
+            const __m512i t2 = _mm512_xor_si512(A, c1);
+            const __m512i t3 = _mm512_xor_si512(B, C);
+            const __m512i t4 = _mm512_xor_si512(t2, t3);
+            const __m512i t5 = _mm512_and_si512(t1, t4);
             return t5;
         }
         // code=0x2a, function=(C and (B nand A)), lowered=((B and A) notand C), set=intel
@@ -329,15 +329,15 @@ namespace ternarylogic {
             const __m512i t1 = _mm512_andnot_si512(t0, C);
             return t1;
         }
-        // code=0x2b, function=(C ? (B nand A) : (B nor A)), lowered=(((B and A) notand C) or (C notand ((B or A) xor 1))), set=intel
+        // code=0x2b, function=((not (B) and (not (C) and A)) xor (not (B) or (not (A) and C))), lowered=((B notand (C notand A)) xor ((B xor 1) or (A notand C))), set=neon
         template<> __m512i ternary<0x2b>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_and_si512(B, A);
-            const __m512i t1 = _mm512_andnot_si512(t0, C);
-            const __m512i t2 = _mm512_or_si512(B, A);
+            const __m512i t0 = _mm512_andnot_si512(C, A);
+            const __m512i t1 = _mm512_andnot_si512(B, t0);
             const __m512i c1 = _mm512_set1_epi32(-1);
-            const __m512i t3 = _mm512_xor_si512(t2, c1);
-            const __m512i t4 = _mm512_andnot_si512(C, t3);
-            const __m512i t5 = _mm512_or_si512(t1, t4);
+            const __m512i t2 = _mm512_xor_si512(B, c1);
+            const __m512i t3 = _mm512_andnot_si512(A, C);
+            const __m512i t4 = _mm512_or_si512(t2, t3);
+            const __m512i t5 = _mm512_xor_si512(t1, t4);
             return t5;
         }
         // code=0x2c, function=((B or C) and (A xor B)), lowered=((B or C) and (A xor B)), set=automat
@@ -402,13 +402,13 @@ namespace ternarylogic {
             const __m512i t2 = _mm512_andnot_si512(t0, t1);
             return t2;
         }
-        // code=0x35, function=(A ? not (B) : not (C)), lowered=((B notand A) or (A notand (C xor 1))), set=intel
+        // code=0x35, function=((A and B) xor (not (C) or A)), lowered=((A and B) xor ((C xor 1) or A)), set=neon
         template<> __m512i ternary<0x35>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_andnot_si512(B, A);
+            const __m512i t0 = _mm512_and_si512(A, B);
             const __m512i c1 = _mm512_set1_epi32(-1);
             const __m512i t1 = _mm512_xor_si512(C, c1);
-            const __m512i t2 = _mm512_andnot_si512(A, t1);
-            const __m512i t3 = _mm512_or_si512(t0, t2);
+            const __m512i t2 = _mm512_or_si512(t1, A);
+            const __m512i t3 = _mm512_xor_si512(t0, t2);
             return t3;
         }
         // code=0x36, function=(B xor (A or C)), lowered=(B xor (A or C)), set=intel
@@ -533,13 +533,13 @@ namespace ternarylogic {
             const __m512i t2 = _mm512_andnot_si512(t0, t1);
             return t2;
         }
-        // code=0x47, function=(B ? not (C) : not (A)), lowered=((C notand B) or (B notand (A xor 1))), set=intel
+        // code=0x47, function=((B and C) xor (not (A) or B)), lowered=((B and C) xor ((A xor 1) or B)), set=neon
         template<> __m512i ternary<0x47>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_andnot_si512(C, B);
+            const __m512i t0 = _mm512_and_si512(B, C);
             const __m512i c1 = _mm512_set1_epi32(-1);
             const __m512i t1 = _mm512_xor_si512(A, c1);
-            const __m512i t2 = _mm512_andnot_si512(B, t1);
-            const __m512i t3 = _mm512_or_si512(t0, t2);
+            const __m512i t2 = _mm512_or_si512(t1, B);
+            const __m512i t3 = _mm512_xor_si512(t0, t2);
             return t3;
         }
         // code=0x48, function=(B and (A xor C)), lowered=(B and (A xor C)), set=intel
@@ -548,15 +548,15 @@ namespace ternarylogic {
             const __m512i t1 = _mm512_and_si512(B, t0);
             return t1;
         }
-        // code=0x49, function=(B ? (A xor C) : (A nor C)), lowered=((B and (A xor C)) or (B notand ((A or C) xor 1))), set=intel
+        // code=0x49, function=((not (A) or B) and (not (A) xor (B xor C))), lowered=(((A xor 1) or B) and ((A xor 1) xor (B xor C))), set=neon
         template<> __m512i ternary<0x49>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_xor_si512(A, C);
-            const __m512i t1 = _mm512_and_si512(B, t0);
-            const __m512i t2 = _mm512_or_si512(A, C);
             const __m512i c1 = _mm512_set1_epi32(-1);
-            const __m512i t3 = _mm512_xor_si512(t2, c1);
-            const __m512i t4 = _mm512_andnot_si512(B, t3);
-            const __m512i t5 = _mm512_or_si512(t1, t4);
+            const __m512i t0 = _mm512_xor_si512(A, c1);
+            const __m512i t1 = _mm512_or_si512(t0, B);
+            const __m512i t2 = _mm512_xor_si512(A, c1);
+            const __m512i t3 = _mm512_xor_si512(B, C);
+            const __m512i t4 = _mm512_xor_si512(t2, t3);
+            const __m512i t5 = _mm512_and_si512(t1, t4);
             return t5;
         }
         // code=0x4a, function=((B or C) and (A xor C)), lowered=((B or C) and (A xor C)), set=automat
@@ -580,15 +580,15 @@ namespace ternarylogic {
             const __m512i t1 = _mm512_andnot_si512(t0, B);
             return t1;
         }
-        // code=0x4d, function=(B ? (A nand C) : (A nor C)), lowered=(((A and C) notand B) or (B notand ((A or C) xor 1))), set=intel
+        // code=0x4d, function=((not (C) and (not (B) and A)) xor (not (C) or (not (A) and B))), lowered=((C notand (B notand A)) xor ((C xor 1) or (A notand B))), set=neon
         template<> __m512i ternary<0x4d>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_and_si512(A, C);
-            const __m512i t1 = _mm512_andnot_si512(t0, B);
-            const __m512i t2 = _mm512_or_si512(A, C);
+            const __m512i t0 = _mm512_andnot_si512(B, A);
+            const __m512i t1 = _mm512_andnot_si512(C, t0);
             const __m512i c1 = _mm512_set1_epi32(-1);
-            const __m512i t3 = _mm512_xor_si512(t2, c1);
-            const __m512i t4 = _mm512_andnot_si512(B, t3);
-            const __m512i t5 = _mm512_or_si512(t1, t4);
+            const __m512i t2 = _mm512_xor_si512(C, c1);
+            const __m512i t3 = _mm512_andnot_si512(A, B);
+            const __m512i t4 = _mm512_or_si512(t2, t3);
+            const __m512i t5 = _mm512_xor_si512(t1, t4);
             return t5;
         }
         // code=0x4e, function=(C ? not (A) : B), lowered=((A notand C) or (C notand B)), set=intel
@@ -626,13 +626,13 @@ namespace ternarylogic {
             const __m512i t2 = _mm512_andnot_si512(t0, t1);
             return t2;
         }
-        // code=0x53, function=(A ? not (C) : not (B)), lowered=((C notand A) or (A notand (B xor 1))), set=intel
+        // code=0x53, function=((A and C) xor (not (B) or A)), lowered=((A and C) xor ((B xor 1) or A)), set=neon
         template<> __m512i ternary<0x53>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_andnot_si512(C, A);
+            const __m512i t0 = _mm512_and_si512(A, C);
             const __m512i c1 = _mm512_set1_epi32(-1);
             const __m512i t1 = _mm512_xor_si512(B, c1);
-            const __m512i t2 = _mm512_andnot_si512(A, t1);
-            const __m512i t3 = _mm512_or_si512(t0, t2);
+            const __m512i t2 = _mm512_or_si512(t1, A);
+            const __m512i t3 = _mm512_xor_si512(t0, t2);
             return t3;
         }
         // code=0x54, function=(not (C) and (A or B)), lowered=(C notand (A or B)), set=automat
@@ -725,15 +725,15 @@ namespace ternarylogic {
             const __m512i t1 = _mm512_and_si512(A, t0);
             return t1;
         }
-        // code=0x61, function=(A ? (B xor C) : (B nor C)), lowered=((A and (B xor C)) or (A notand ((B or C) xor 1))), set=intel
+        // code=0x61, function=((not (B) or A) and (not (B) xor (A xor C))), lowered=(((B xor 1) or A) and ((B xor 1) xor (A xor C))), set=neon
         template<> __m512i ternary<0x61>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_xor_si512(B, C);
-            const __m512i t1 = _mm512_and_si512(A, t0);
-            const __m512i t2 = _mm512_or_si512(B, C);
             const __m512i c1 = _mm512_set1_epi32(-1);
-            const __m512i t3 = _mm512_xor_si512(t2, c1);
-            const __m512i t4 = _mm512_andnot_si512(A, t3);
-            const __m512i t5 = _mm512_or_si512(t1, t4);
+            const __m512i t0 = _mm512_xor_si512(B, c1);
+            const __m512i t1 = _mm512_or_si512(t0, A);
+            const __m512i t2 = _mm512_xor_si512(B, c1);
+            const __m512i t3 = _mm512_xor_si512(A, C);
+            const __m512i t4 = _mm512_xor_si512(t2, t3);
+            const __m512i t5 = _mm512_and_si512(t1, t4);
             return t5;
         }
         // code=0x62, function=((A or C) and (B xor C)), lowered=((A or C) and (B xor C)), set=automat
@@ -1139,15 +1139,15 @@ namespace ternarylogic {
             const __m512i t1 = _mm512_xor_si512(A, t0);
             return t1;
         }
-        // code=0x97, function=(A ? (B xnor C) : (B nand C)), lowered=(((B xor C) notand A) or (A notand ((B and C) xor 1))), set=intel
+        // code=0x97, function=(((not (B) or A) xor A) or (A xor (B xor C))), lowered=((((B xor 1) or A) xor A) or (A xor (B xor C))), set=neon
         template<> __m512i ternary<0x97>(const __m512i A, const __m512i B, const __m512i C) {
-            const __m512i t0 = _mm512_xor_si512(B, C);
-            const __m512i t1 = _mm512_andnot_si512(t0, A);
-            const __m512i t2 = _mm512_and_si512(B, C);
             const __m512i c1 = _mm512_set1_epi32(-1);
-            const __m512i t3 = _mm512_xor_si512(t2, c1);
-            const __m512i t4 = _mm512_andnot_si512(A, t3);
-            const __m512i t5 = _mm512_or_si512(t1, t4);
+            const __m512i t0 = _mm512_xor_si512(B, c1);
+            const __m512i t1 = _mm512_or_si512(t0, A);
+            const __m512i t2 = _mm512_xor_si512(t1, A);
+            const __m512i t3 = _mm512_xor_si512(B, C);
+            const __m512i t4 = _mm512_xor_si512(A, t3);
+            const __m512i t5 = _mm512_or_si512(t2, t4);
             return t5;
         }
         // code=0x98, function=(not ((B xor C)) and (A or B)), lowered=((B xor C) notand (A or B)), set=automat

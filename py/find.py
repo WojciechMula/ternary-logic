@@ -114,6 +114,7 @@ from lib.simplify import simplify
 Target_SSE      = 10
 Target_AVX2     = 20
 Target_XOP      = 30
+Target_NEON     = 70
 
 def parse_args(args):
     from optparse import OptionParser
@@ -122,7 +123,7 @@ def parse_args(args):
 
     parser.add_option(
         "--target",
-        help="choose target (SSE, AVX2, XOP)"
+        help="choose target (SSE, AVX2, XOP, NEON)"
     )
 
     parser.add_option(
@@ -144,8 +145,10 @@ def parse_args(args):
         options.target = Target_AVX2
     elif options.target.lower() == 'xop':
         options.target = Target_XOP
+    elif options.target.lower() == 'neon':
+        options.target = Target_NEON
     else:
-        valid = ('sse', 'avx2', 'xop')
+        valid = ('sse', 'avx2', 'xop', 'neon')
         parser.error("--target expects: %s" % ', '.join(valid))
 
     return options
@@ -175,6 +178,11 @@ class Application:
         elif self.options.target == Target_XOP:
             from lib.lowering_xop   import transform
             from lib.assembler_xop  import AssemblerXOP as AssemblerClass
+            self.transform = transform
+            self.AssemblerClass = AssemblerClass
+        elif self.options.target == Target_NEON:
+            from lib.lowering_neon  import transform
+            from lib.assembler_neon import AssemblerNEON as AssemblerClass
             self.transform = transform
             self.AssemblerClass = AssemblerClass
 
