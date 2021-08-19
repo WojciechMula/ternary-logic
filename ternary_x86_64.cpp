@@ -771,15 +771,13 @@ namespace ternarylogic {
             const uint64_t t3 = t0 | t2;
             return t3;
         }
-        // code=0x68, function=(A ? (B xor C) : (B and C)), lowered=((A and (B xor C)) or (not (A) and (B and C))), set=intel
+        // code=0x68, function=(A ? (B xor C) : (B and C)), lowered=(((A and B) xor C) and (A or B)), set=intel
         template<> uint64_t ternary<0x68>(const uint64_t A, const uint64_t B, const uint64_t C) {
-            const uint64_t t0 = B ^ C;
-            const uint64_t t1 = A & t0;
-            const uint64_t t2 = ~A;
-            const uint64_t t3 = B & C;
-            const uint64_t t4 = t2 & t3;
-            const uint64_t t5 = t1 | t4;
-            return t5;
+            const uint64_t t0 = A & B;
+            const uint64_t t1 = A | B;
+            const uint64_t t2 = t0 ^ C;
+            const uint64_t t3 = t2 & t1;
+            return t3;
         }
         // code=0x69, function=(A xnor (B xor C)), lowered=not ((A xor (B xor C))), set=intel
         template<> uint64_t ternary<0x69>(const uint64_t A, const uint64_t B, const uint64_t C) {
