@@ -1,4 +1,4 @@
-import parser
+import lib.parser as parser
 
 def load(file):
 

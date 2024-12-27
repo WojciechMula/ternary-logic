@@ -1,4 +1,4 @@
-from ast import *
+from lib.ast import *
 
 class BodyGenerator:
     def __init__(self, root, assembler):

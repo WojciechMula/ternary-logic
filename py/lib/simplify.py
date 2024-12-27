@@ -1,4 +1,4 @@
-from ast import *
+from lib.ast import *
 
 def simplify(root):
 
@@ -51,7 +51,7 @@ def simplify(root):
                     if a.value:
                         return Negation(b)      # x xor 1 = not x
                     else:
-                        return b                # x and 0 = x
+                        return b                # x xor 0 = x
 
             if isinstance(b, Constant):
 

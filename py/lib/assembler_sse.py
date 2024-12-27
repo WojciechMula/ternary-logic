@@ -1,4 +1,4 @@
-from assembler import Assembler
+from lib.assembler import Assembler
 
 class AssemblerSSE(Assembler):
 

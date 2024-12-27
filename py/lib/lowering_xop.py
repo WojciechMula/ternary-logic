@@ -1,7 +1,7 @@
 # Transformations to XOP vcmov
 
-from ast import *
-from lowering_sse import transform_negations
+from lib.ast import *
+from lib.lowering_sse import transform_negations
 
 def transform_binary(root):
 

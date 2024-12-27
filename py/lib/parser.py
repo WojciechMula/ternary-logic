@@ -1,5 +1,5 @@
-from lexer import Lexer
-from ast import *
+from lib.lexer import Lexer
+from lib.ast import *
 
 def expression(lexer):
     c = lexer.peek()
@@ -60,7 +60,6 @@ def expression(lexer):
 
             return ret
 
-        print `lexer`
         assert False, "unknown function"
 
 

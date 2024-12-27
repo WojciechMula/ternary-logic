@@ -31,4 +31,4 @@ M = {
     'g': bit(d, 6),
     'h': bit(d, 7),
 }
-print s % M
+print(s % M)

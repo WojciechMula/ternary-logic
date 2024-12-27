@@ -199,7 +199,7 @@ class Application:
     def pick_best(self, path):
         with get_file(path, 'rt') as f:
             tmp = load(f)
-            for index, (string, expr) in tmp.iteritems():
+            for index, (string, expr) in tmp.items():
                 root = self.transform(expr)
                 gen  = BodyGenerator(root, self.AssemblerClass())
                 body = gen.run()
@@ -232,13 +232,13 @@ class Application:
             body  = gen.run()
             index = fun.bin()
             if len(body) < len(self.data[index][1]):
-                print
-                print "improved %02x (%s):" % (index, root)
-                print "was:"
-                print "\n".join(self.data[index][1])
-                print "better:"
-                print "\n".join(body)
-                print
+                print()
+                print("improved %02x (%s):" % (index, root))
+                print("was:")
+                print("\n".join(self.data[index][1]))
+                print("better:")
+                print("\n".join(body))
+                print()
                 self.data[index] = (root, body)
                 self.improved.add(index)
 

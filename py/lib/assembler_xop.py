@@ -1,4 +1,4 @@
-from assembler_sse import AssemblerSSE
+from lib.assembler_sse import AssemblerSSE
 
 class AssemblerXOP(AssemblerSSE):
 

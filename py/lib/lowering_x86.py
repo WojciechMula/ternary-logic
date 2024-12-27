@@ -1,6 +1,6 @@
 # Transformations apply to x86 code
 
-from ast import *
+from lib.ast import *
 
 def transform_binary(root):
 

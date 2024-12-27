@@ -182,11 +182,11 @@ class CodeGenerator:
         paths = {
             'optimized': 'data/manually_optimized.txt',
             'automat'  : 'data/sse_and_avx2.txt',
-            'neon'     : 'data/neon.txt',
+            #'neon'     : 'data/neon.txt', lost it
             'xop'      : 'data/xop.txt',
         }
 
-        for name, path in paths.iteritems():
+        for name, path in paths.items():
             with get_file(path, 'rt') as f:
                 self.data[name] = load(f)
 
@@ -213,7 +213,7 @@ class CodeGenerator:
 
     def generate(self):
         result = ''
-        for code in xrange(256):
+        for code in range(256):
             weight = 1e10 # It is rather unlikely that a 3-argument function would be expressed
                           # by more than one million instructions. :)
             src    = None
@@ -249,7 +249,7 @@ def execute(options):
     res = gen.run()
     with open(options.filename, 'wt') as f:
         f.write(res)
-        print "%s created" % (options.filename)
+        print("%s created" % (options.filename))
 
 
 if __name__ == '__main__':

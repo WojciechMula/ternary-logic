@@ -1,4 +1,4 @@
-from ast import *
+from lib.ast import *
 
 def transform_binary(root):
 

@@ -1,6 +1,6 @@
 # Transformations apply to all SSE, AVX and AVX512.
 
-from ast import *
+from lib.ast import *
 
 def transform_binary(root):
 
