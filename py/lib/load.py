@@ -1,7 +1,7 @@
 import lib.parser as parser
 
-def load(file):
 
+def load(file):
     result = {}
 
     for k, line in enumerate(file):
@@ -12,7 +12,7 @@ def load(file):
             continue
 
         f = line.split()
-        assert(len(f) == 2)
+        assert len(f) == 2
 
         value  = int(f[0], 16)
         string = f[1]

@@ -1,7 +1,7 @@
 from lib.assembler import Assembler
 
-class AssemblerSSE(Assembler):
 
+class AssemblerSSE(Assembler):
     def __init__(self):
         Assembler.__init__(self)
         self.type = '__m128i'

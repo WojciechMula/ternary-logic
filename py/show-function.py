@@ -18,8 +18,10 @@ d = int(sys.argv[1], 16)
 assert d >= 0
 assert d < 256
 
+
 def bit(d, i):
     return int((d & (1 << i)) != 0)
+
 
 M = {
     'a': bit(d, 0),

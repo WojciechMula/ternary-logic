@@ -31,11 +31,13 @@ class Negation(Node):
     def __repr__(self):
         return '!%r' % self.value
 
+
 VAR = {
     'A': 0xf0,
     'B': 0xcc,
     'C': 0xaa
 }
+
 
 class Variable(Node):
     def __init__(self, var):
@@ -48,7 +50,7 @@ class Variable(Node):
         return self.var
 
     __repr__ = __str__
-    
+
 
 class Binary(Node):
     def __init__(self, op, a, b):
@@ -99,4 +101,3 @@ class Condition(Node):
 
     def __repr__(self):
         return '%r?%r:%r' % (self.var, self.true, self.false)
-

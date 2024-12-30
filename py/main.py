@@ -1,5 +1,4 @@
 import sys
-import lib
 from os.path import dirname, join, realpath
 from lib.load import load
 
@@ -14,7 +13,7 @@ Target_NEON     = 70
 
 
 def main():
-    options = parse_args(sys.argv)   
+    options = parse_args(sys.argv)
     execute(options)
 
 
@@ -97,7 +96,6 @@ class CodeGenerator:
         self.setup()
         self.load()
 
-
     def setup(self):
         import lib.lowering_sse
         import lib.lowering_xop
@@ -147,7 +145,6 @@ class CodeGenerator:
         self.global_indent = get_indent(self.main_pattern, '%(FUNCTIONS)s')
         self.body_indent   = get_indent(self.function_pattern, '%(BODY)s')
 
-
     def get_main_file(self):
         if self.options.target == Target_SSE:
             return 'cpp.sse.main'
@@ -166,30 +163,25 @@ class CodeGenerator:
         else:
             assert False
 
-
     def get_function_file(self):
         return 'cpp.function'
-
 
     def load(self):
         self.data = {}
         with get_file('data/intel.txt', 'rt') as f:
             self.data['intel'] = load(f)
 
-            assert(len(self.data['intel']) == 256)
-            
+            assert len(self.data['intel']) == 256
 
         paths = {
             'optimized': 'data/manually_optimized.txt',
             'automat'  : 'data/sse_and_avx2.txt',
-            #'neon'     : 'data/neon.txt', lost it
             'xop'      : 'data/xop.txt',
         }
 
         for name, path in paths.items():
             with get_file(path, 'rt') as f:
                 self.data[name] = load(f)
-
 
     def generate_single(self, code, expr, source):
 
@@ -210,12 +202,12 @@ class CodeGenerator:
 
         return (len(body), self.function_pattern % params)
 
-
     def generate(self):
         result = ''
         for code in range(256):
-            weight = 1e10 # It is rather unlikely that a 3-argument function would be expressed
-                          # by more than one million instructions. :)
+            # It is rather unlikely that a 3-argument function would be expressed
+            # by more than one million instructions. :)
+            weight = 1e10
             src    = None
 
             for name in self.data:
@@ -228,7 +220,6 @@ class CodeGenerator:
                     if w < weight:
                         src    = s
                         weight = w
-                        picked_set = name
 
             assert src is not None
             result += src
@@ -240,11 +231,10 @@ class CodeGenerator:
 
         return self.main_pattern % params
 
-
     run = generate
 
-def execute(options):
 
+def execute(options):
     gen = CodeGenerator(options)
     res = gen.run()
     with open(options.filename, 'wt') as f:
@@ -254,4 +244,3 @@ def execute(options):
 
 if __name__ == '__main__':
     main()
-

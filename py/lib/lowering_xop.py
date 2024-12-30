@@ -1,10 +1,14 @@
 # Transformations to XOP vcmov
 
-from lib.ast import *
+from lib.ast import Constant
+from lib.ast import Variable
+from lib.ast import Negation
+from lib.ast import Binary
+from lib.ast import Condition
 from lib.lowering_sse import transform_negations
 
-def transform_binary(root):
 
+def transform_binary(root):
     if isinstance(root, (Constant, Variable)):
         return root
 
@@ -36,7 +40,7 @@ def transform_binary(root):
         true  = transform_binary(root.true)
         false = transform_binary(root.false)
 
-        return Condition(var, true, false);
+        return Condition(var, true, false)
 
     if isinstance(root, Negation):
         return Negation(transform_binary(root.value))

@@ -1,7 +1,11 @@
-from lib.ast import *
+from lib.ast import Constant
+from lib.ast import Variable
+from lib.ast import Negation
+from lib.ast import Binary
+from lib.ast import Condition
+
 
 def simplify(root):
-
     if isinstance(root, (Constant, Variable)):
         return root
 
@@ -11,7 +15,7 @@ def simplify(root):
             return Constant(not v.value)
 
         if isinstance(v, Negation):
-            return v.value # not (not x) = x
+            return v.value  # not (not x) = x
 
         return Negation(v)
 
@@ -20,11 +24,13 @@ def simplify(root):
         b = simplify(root.b)
         if root.op in set(('or', 'and', 'xor', 'notand', 'notor')):
             if isinstance(a, Variable) and isinstance(b, Variable) and a.var == b.var:
-                
+
                 if root.op in ('or', 'and'):
-                    return a # x or x = x, also x and x = x
+                    # x or x = x, also x and x = x
+                    return a
                 elif root.op in ('xor', 'notand', 'notor'):
-                    return Constant(False) # x xor x = 0
+                    # x xor x = 0
+                    return Constant(False)
 
             if isinstance(a, Constant) and isinstance(b, Constant):
                 if root.op == 'or':
@@ -33,7 +39,7 @@ def simplify(root):
                     return Constant(a.value and b.value)
                 elif root.op == 'xor':
                     return Constant((a.value and not b.value) or (not a.value and b.value))
-            
+
             if isinstance(a, Constant):
                 if root.op == 'or':
                     if a.value:

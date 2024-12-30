@@ -1,7 +1,7 @@
 from lib.assembler_sse import AssemblerSSE
 
-class AssemblerXOP(AssemblerSSE):
 
+class AssemblerXOP(AssemblerSSE):
     def __init__(self):
         AssemblerSSE.__init__(self)
 

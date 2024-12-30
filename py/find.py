@@ -1,7 +1,15 @@
 import sys
 from os.path import dirname, join, realpath
-from lib.ast import *
 from itertools import chain
+from lib.ast import Constant
+from lib.ast import Variable
+from lib.ast import Negation
+from lib.ast import Binary
+from lib.ast import Condition
+from lib.bodygen import BodyGenerator
+from lib.load import load
+from lib.simplify import simplify
+
 
 def arguments():
     yield (Variable('A'), Variable('B'))
@@ -17,6 +25,7 @@ def arguments():
     yield (Variable('B'), Constant(True))
     yield (Variable('C'), Constant(True))
 
+
 def variables():
     yield Constant(False)
     yield Constant(True)
@@ -27,15 +36,18 @@ def variables():
     yield Negation(Variable('B'))
     yield Negation(Variable('C'))
 
+
 def ops():
     yield 'and'
     yield 'or'
     yield 'xor'
 
+
 def two_ops():
     for op1 in ops():
         for op2 in ops():
             yield (op1, op2)
+
 
 def three_ops():
     for op1 in ops():
@@ -43,11 +55,13 @@ def three_ops():
             for op3 in ops():
                 yield (op1, op2, op3)
 
+
 def three_pairs_of_args():
     for arg1 in arguments():
         for arg2 in arguments():
             for arg3 in arguments():
                 yield (arg1, arg2, arg3)
+
 
 def two_pairs_of_args():
     for arg1 in arguments():
@@ -106,15 +120,11 @@ def conditions():
                 yield Condition(var, t, f)
 
 
-from lib.bodygen import BodyGenerator
-from lib.load import load
-from lib.simplify import simplify
-
-
 Target_SSE      = 10
 Target_AVX2     = 20
 Target_XOP      = 30
 Target_NEON     = 70
+
 
 def parse_args(args):
     from optparse import OptionParser
@@ -186,15 +196,12 @@ class Application:
             self.transform = transform
             self.AssemblerClass = AssemblerClass
 
-
         self.improved = set()
-
 
     def run(self):
         self.load()
         self.find_better()
         self.save()
-
 
     def pick_best(self, path):
         with get_file(path, 'rt') as f:
@@ -204,17 +211,15 @@ class Application:
                 gen  = BodyGenerator(root, self.AssemblerClass())
                 body = gen.run()
                 if index not in self.data:
-                   self.data[index] = (root, body)
+                    self.data[index] = (root, body)
                 elif len(body) < len(self.data[index]):
-                   self.data[index] = (root, body)
-
+                    self.data[index] = (root, body)
 
     def load(self):
         self.data = {}
         paths = ('data/intel.txt', 'data/manually_optimized.txt', 'data/sse_and_avx2.txt')
         for path in paths:
             self.pick_best(path)
-
 
     def find_better(self):
         processed = set()
@@ -242,7 +247,6 @@ class Application:
                 self.data[index] = (root, body)
                 self.improved.add(index)
 
-
     def save(self):
         if not self.improved:
             return
@@ -256,7 +260,7 @@ class Application:
 
 def main():
     options = parse_args(sys.argv)
-    
+
     if options.target == Target_XOP:
         functions = conditions()
     else:
@@ -268,4 +272,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

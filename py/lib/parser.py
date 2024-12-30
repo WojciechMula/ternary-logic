@@ -1,5 +1,10 @@
 from lib.lexer import Lexer
-from lib.ast import *
+from lib.ast import Variable
+from lib.ast import Binary
+from lib.ast import Negation
+from lib.ast import Constant
+from lib.ast import Condition
+
 
 def expression(lexer):
     c = lexer.peek()
@@ -12,13 +17,13 @@ def expression(lexer):
             lexer.consume()
             true = expression(lexer)
 
-            assert(lexer.peek() == ':')
+            assert lexer.peek() == ':'
             lexer.consume()
             false = expression(lexer)
 
             return Condition(v, true, false)
         else:
-            assert(lexer.eof)
+            assert lexer.eof
             return v
 
     elif c == '1':
@@ -49,7 +54,7 @@ def expression(lexer):
             a = Negation(expression(lexer))
             b = expression(lexer)
             ret = Binary('and', a, b)
-            
+
             return ret
 
         if lexer.startswith('notor'):
@@ -75,4 +80,3 @@ def parse(s):
     assert L.eof()
 
     return expr
-

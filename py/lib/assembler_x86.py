@@ -1,7 +1,7 @@
 from lib.assembler import Assembler
 
-class AssemblerX86(Assembler):
 
+class AssemblerX86(Assembler):
     def __init__(self, base_type):
         Assembler.__init__(self)
         self.type = base_type
@@ -48,6 +48,7 @@ class AssemblerX86(Assembler):
         expr = '%s %s = (%s & %s) | (~%s & %s);' % (self.const_type, var, cond, var1, cond, var2)
 
         return (var, expr)
+
 
 class AssemblerX86_64(AssemblerX86):
     def __init__(self):

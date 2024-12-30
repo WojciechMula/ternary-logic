@@ -1,10 +1,14 @@
 # Transformations apply to x86 code
 
-from lib.ast import *
+from lib.ast import Constant
+from lib.ast import Variable
+from lib.ast import Negation
+from lib.ast import Binary
+from lib.ast import Condition
+
 
 def transform_binary(root):
-
-    if isinstance(root, (Constant, Variable, Negation)): # negations can be expressed in plain C/C++
+    if isinstance(root, (Constant, Variable, Negation)):  # negations can be expressed in plain C/C++
         return root
 
     if isinstance(root, Binary):
@@ -35,7 +39,5 @@ def transform_binary(root):
     assert False, root
 
 
-
 def transform(root):
     return transform_binary(root)
-

@@ -1,4 +1,9 @@
-from lib.ast import *
+from lib.ast import Constant
+from lib.ast import Variable
+from lib.ast import Negation
+from lib.ast import Binary
+from lib.ast import Condition
+
 
 class BodyGenerator:
     def __init__(self, root, assembler):
@@ -61,7 +66,7 @@ class BodyGenerator:
 
             var, expr = self.assembler.add_condition(cond, true, false)
 
-        assert var != None
+        assert var is not None
 
         if expr:
             self.program.append(expr)
@@ -69,7 +74,6 @@ class BodyGenerator:
         self.variables[node] = var
         self.last = var
         return var
-
 
     def run(self):
         self.emit(self.root)

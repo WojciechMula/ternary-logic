@@ -1,7 +1,7 @@
 from lib.assembler import Assembler
 
-class AssemblerAVX512(Assembler):
 
+class AssemblerAVX512(Assembler):
     def __init__(self):
         Assembler.__init__(self)
         self.type = '__m512i'
@@ -45,4 +45,3 @@ class AssemblerAVX512(Assembler):
 
     def add_not(self, var):
         pass
-

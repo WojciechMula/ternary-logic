@@ -1,7 +1,11 @@
-from lib.ast import *
+from lib.ast import Constant
+from lib.ast import Variable
+from lib.ast import Negation
+from lib.ast import Binary
+from lib.ast import Condition
+
 
 def transform_binary(root):
-
     if isinstance(root, (Constant, Variable)):
         return root
 

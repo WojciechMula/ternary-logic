@@ -45,10 +45,9 @@ ternary_x86_32.cpp: $(PYDEPS) py/cpp.function py/cpp.x86_32.main $(DATA)
 ternary_neon.cpp: $(PYDEPS) py/cpp.function py/cpp.neon.main $(DATA)
 	$(PYTHON) py/main.py --target=neon -o $@
 
-
 test: validate_sse validate_x86
 	./validate_sse
 	./validate_x86
 
 clean:
-	rm -f $(ALL)
+	$(RM) $(ALL)

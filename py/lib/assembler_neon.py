@@ -1,7 +1,7 @@
 from lib.assembler import Assembler
 
-class AssemblerNEON(Assembler):
 
+class AssemblerNEON(Assembler):
     def __init__(self):
         Assembler.__init__(self)
         self.type = 'int32x4_t'
