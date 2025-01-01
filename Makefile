@@ -2,7 +2,7 @@ FLAGS=-std=c++11 -O2 -Wall -pedantic
 PYDEPS=py/*.py py/lib/*.py
 DATA=py/data/*.txt
 ALL=validate_sse validate_avx2 validate_xop validate_x86 ternary_avx512.o ternary_neon.cpp
-PYTHON?=python
+PYTHON?=python3
 
 all: $(ALL)
 
@@ -49,5 +49,12 @@ test: validate_sse validate_x86
 	./validate_sse
 	./validate_x86
 
+.PHONY: html
+html: html/index.html
+
+html/index.html: py/html.py
+	$(PYTHON) py/html.py -o $@
+
+.PHONY: clean
 clean:
 	$(RM) $(ALL)

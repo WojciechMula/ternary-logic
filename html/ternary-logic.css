@@ -1,0 +1,110 @@
+body {
+    margin-left: 0px;
+    margin-top: 2em;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+h1, h2, h3 {
+    color: darkblue;
+}
+
+div#menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 300px;
+    height: 100%;
+    padding: 10px;
+    background-color: #ccc;
+}
+
+div#menu a {
+    text-decoration: none;
+    color: black;
+}
+
+div#content {
+    margin-left: 330px;
+}
+
+button {
+    padding: 5px;
+    background-color: lightgray;
+    border: none;
+    cursor: pointer;
+}
+
+button.selected {
+    background-color: black;
+    color: white;
+}
+
+div.group {
+    clear: both;
+}
+
+div.data pre {
+    background-color: #eee;
+    padding: 1ex;
+}
+
+div.data pre span.k {
+    /* keyword */
+    font-weight: bold;
+}
+
+div.data pre span.t {
+    /* type name */
+    font-weight: bold;
+}
+
+div.data pre span.v {
+    /* variable */
+    color: blue;
+}
+
+div.data pre span.a {
+    /* input argument */
+    color: red;
+}
+
+div.data {
+    padding: 1ex;
+    border-width: 1px;
+    border-style: solid;
+    border-color: gray;
+}
+
+table#comparison-table thead td {
+    font-weight: bold;
+    background: black;
+    color: white;
+}
+
+table#comparison-table tbody tr.even {
+    background-color: #eee;
+}
+
+table#comparison-table tbody tr.odd {
+    background-color: #fff;
+}
+
+table.truth-table {
+    float: left;
+    margin-right: 1ex;
+}
+
+table.truth-table thead {
+    background: lightgray;
+    color: black;
+}
+
+table.truth-table td {
+    text-align: center;
+}
+
+table.truth-table tbody tr.one {
+    background-color: #dfd;
